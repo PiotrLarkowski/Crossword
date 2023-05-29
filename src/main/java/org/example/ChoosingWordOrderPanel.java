@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ChoosingWordOrderPanel extends JPanel implements ActionListener {
-    JButton backButton;
+    JButton backButton, showButton;
     JComboBox wordChooser;
     JLabel textMessageNextToWordChooserEN;
     JLabel textMessageNextToWordChooserPL;
@@ -22,6 +22,11 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener {
         backButton.setBounds(675,475,400,50);
         add(backButton);
         backButton.addActionListener(this);
+
+        showButton = new JButton("Show position / Pokaz pozycje");
+        showButton.setBounds(675,640,400,50);
+        add(showButton);
+        showButton.addActionListener(this);
 
         wordChooser = new JComboBox();
         wordChooser.setBounds(675,555,50,60);
@@ -66,13 +71,26 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener {
                         ||(j == 6 && i == 6)||(j == 8 && i == 6)||(j == 9 && i == 6)){
                     g.fillRect(100 + numberOfRectInWidth, 100+numberOfRectInHeight, 50, 50);
                 }else{
-                    if(wordChooser.getSelectedItem().equals("1")){
+                    g.drawRect(100 + numberOfRectInWidth, 100+numberOfRectInHeight, 50, 50);
+                    if(wordChooser.getSelectedItem().toString().equals("1")){
                         g.setColor(Color.GREEN);
-                        g.fillRect(100 + numberOfRectInWidth, 100+numberOfRectInHeight, 50, 50);
+                        g.fillRect(100, 100, 50, 50);
+                        g.fillRect(150, 100, 50, 50);
+                        g.fillRect(200, 100, 50, 50);
+                        g.fillRect(250, 100, 50, 50);
+                        g.fillRect(300, 100, 50, 50);
+                        g.fillRect(350, 100, 50, 50);
+                        g.fillRect(400, 100, 50, 50);
                         g.setColor(Color.BLACK);
-                    }else{
-                        g.drawRect(100 + numberOfRectInWidth, 100+numberOfRectInHeight, 50, 50);
+                        g.drawRect(100, 100, 50, 50);
+                        g.drawRect(150, 100, 50, 50);
+                        g.drawRect(200, 100, 50, 50);
+                        g.drawRect(250, 100, 50, 50);
+                        g.drawRect(300, 100, 50, 50);
+                        g.drawRect(350, 100, 50, 50);
+                        g.drawRect(400, 100, 50, 50);
                     }
+
                 }
                 numberOfRectInWidth += 50;
             }
@@ -107,8 +125,9 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener {
         if(event == backButton){
             MainView.selectOrderFrame.dispose();
             MainCrossword.window.setVisible(true);
-        }else if(event == wordChooser){
+        }else if(event == showButton){
             repaint();
+        }else if(event == wordChooser){
         }
     }
 }
