@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ChoosingWordOrderPanel extends JPanel implements ActionListener {
     JButton backButton, showButton;
@@ -47,6 +49,10 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
+        WordVariable word = new WordVariable("1",7,"horizontal",new ArrayList<>(Arrays.asList(100,150,200,250,300,350,400)),new ArrayList<>(Arrays.asList(100,100,100,100,100,100,100)));
+        ArrayList<WordVariable> allWordsList = new ArrayList<>();
+        allWordsList.add(word);
+
         g.setColor(new Color(225,225,225));
         g.fillRect(50,50,MainView.screenSize.width-200, MainView.screenSize.height-200);
 
@@ -73,22 +79,29 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener {
                 }else{
                     g.drawRect(100 + numberOfRectInWidth, 100+numberOfRectInHeight, 50, 50);
                     if(wordChooser.getSelectedItem().toString().equals("1")){
+                        for (int k = 0; k < allWordsList.size(); k++) {
+                            if(allWordsList.get(k).numberOfWord.equals("1")){
+                                for(int kk=0; kk<allWordsList.get(k).lengthOfWord;kk++) {
+                                    g.setColor(Color.GREEN);
+                                    g.fillRect(allWordsList.get(k).PositionOfWordInXAxis.get(kk), allWordsList.get(k).PositionOfWordInYAxis.get(kk), 50, 50);
+                                    g.setColor(Color.BLACK);
+                                    g.drawRect(allWordsList.get(k).PositionOfWordInXAxis.get(kk), allWordsList.get(k).PositionOfWordInYAxis.get(kk), 50, 50);
+                                }
+                            }
+                        }
+                    }if(wordChooser.getSelectedItem().toString().equals("2")){
                         g.setColor(Color.GREEN);
                         g.fillRect(100, 100, 50, 50);
-                        g.fillRect(150, 100, 50, 50);
-                        g.fillRect(200, 100, 50, 50);
-                        g.fillRect(250, 100, 50, 50);
-                        g.fillRect(300, 100, 50, 50);
-                        g.fillRect(350, 100, 50, 50);
-                        g.fillRect(400, 100, 50, 50);
+                        g.fillRect(100, 150, 50, 50);
+                        g.fillRect(100, 200, 50, 50);
+                        g.fillRect(100, 250, 50, 50);
+                        g.fillRect(100, 300, 50, 50);
                         g.setColor(Color.BLACK);
                         g.drawRect(100, 100, 50, 50);
-                        g.drawRect(150, 100, 50, 50);
-                        g.drawRect(200, 100, 50, 50);
-                        g.drawRect(250, 100, 50, 50);
-                        g.drawRect(300, 100, 50, 50);
-                        g.drawRect(350, 100, 50, 50);
-                        g.drawRect(400, 100, 50, 50);
+                        g.drawRect(100, 150, 50, 50);
+                        g.drawRect(100, 200, 50, 50);
+                        g.drawRect(100, 250, 50, 50);
+                        g.drawRect(100, 300, 50, 50);
                     }
 
                 }
