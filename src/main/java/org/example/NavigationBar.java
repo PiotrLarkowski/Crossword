@@ -56,7 +56,7 @@ public class NavigationBar extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object event = e.getSource();
         if(event == mExit){
-            System.exit(1);
+            exitApplication();
         }else if(event == mSave){
 
         }else if(event == mLoad){
@@ -79,7 +79,13 @@ public class NavigationBar extends JPanel implements ActionListener {
         }else if(event == mSetting){
 
         }else if(event == mInformation){
-
+            JOptionPane.showMessageDialog(this,"Filling crossword application, version 1 \n Program usupelniania krzyzowki, wersja 1","Information / O programie",JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    public void exitApplication() {
+        int answer = JOptionPane.showConfirmDialog(this,"Are You sure You want to exit? \n Czy napewno chcesz zakonczyc program?","Exit",JOptionPane.YES_NO_OPTION);
+        if(answer == JOptionPane.YES_OPTION)
+            System.exit(1);
     }
 }

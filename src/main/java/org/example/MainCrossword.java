@@ -26,6 +26,27 @@ public class MainCrossword extends JFrame {
 
         window.pack();
 
+        window.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if(keyCode == KeyEvent.VK_ESCAPE){
+                    int answer = JOptionPane.showConfirmDialog(window,"Are You sure You want to exit? \n Czy napewno chcesz zakonczyc program?","Exit",JOptionPane.YES_NO_OPTION);
+                    if(answer == JOptionPane.YES_OPTION)
+                        System.exit(1);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }

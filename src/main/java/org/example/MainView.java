@@ -31,6 +31,8 @@ public class MainView extends JPanel implements ActionListener {
                     public void keyPressed(KeyEvent e) {
                         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                             repaint();
+                        }else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            doExit();
                         }
                     }
                 });
@@ -44,6 +46,8 @@ public class MainView extends JPanel implements ActionListener {
                     public void keyPressed(KeyEvent e) {
                         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                             openChoosingWordOrderPanel();
+                        }else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            doExit();
                         }
                     }
                 });
@@ -52,6 +56,16 @@ public class MainView extends JPanel implements ActionListener {
 
         startFillingCrosswordButton = new JButton("Star filling crossword / Rozpocznij uzupelnianie krzyzowki");
         startFillingCrosswordButton.setBounds(675,605,400,50);
+        startFillingCrosswordButton.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                        }else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            doExit();
+                        }
+                    }
+                });
         add(startFillingCrosswordButton);
         startFillingCrosswordButton.addActionListener(this);
 
@@ -212,7 +226,6 @@ public class MainView extends JPanel implements ActionListener {
         }else if(event == startFillingCrosswordButton){
 
         }
-
     }
 
     private void openChoosingWordOrderPanel() {
@@ -232,5 +245,10 @@ public class MainView extends JPanel implements ActionListener {
 
         selectOrderFrame.pack();
         selectOrderFrame.setVisible(true);
+    }
+    private void doExit() {
+        int answer = JOptionPane.showConfirmDialog(MainCrossword.window,"Are You sure You want to exit? \n Czy napewno chcesz zakonczyc program?","Exit",JOptionPane.YES_NO_OPTION);
+        if(answer == JOptionPane.YES_OPTION)
+            System.exit(1);
     }
 }
