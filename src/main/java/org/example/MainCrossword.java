@@ -1,6 +1,8 @@
 package org.example;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class MainCrossword extends JFrame {
     public static JFrame window;
@@ -10,6 +12,7 @@ public class MainCrossword extends JFrame {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Crossword");
+
         window.setUndecorated(true);
         window.setVisible(true);
 

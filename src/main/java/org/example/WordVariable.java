@@ -7,14 +7,14 @@ public class WordVariable {
     String numberOfWord;
     int lengthOfWord;
     String verticalOrHorizontal;
-    ArrayList<Integer> PositionOfWordInXAxis;
-    ArrayList<Integer> PositionOfWordInYAxis;
+    int PositionOfFirstCharInXAxis;
+    int PositionOfFirstCharInYAxis;
 
-    public WordVariable(String numberOfWord, int lengthOfWord, String verticalOrHorizontal, ArrayList<Integer> positionOfWordInXAxis, ArrayList<Integer> positionOfWordInYAxis) {
+    public WordVariable(String numberOfWord, int lengthOfWord, String verticalOrHorizontal, int positionOfFirstCharInXAxis, int positionOfFirstCharInYAxis) {
         this.numberOfWord = numberOfWord;
         this.lengthOfWord = lengthOfWord;
         this.verticalOrHorizontal = verticalOrHorizontal;
-        PositionOfWordInXAxis = positionOfWordInXAxis;
-        PositionOfWordInYAxis = positionOfWordInYAxis;
+        PositionOfFirstCharInXAxis = positionOfFirstCharInXAxis;
+        PositionOfFirstCharInYAxis = positionOfFirstCharInYAxis;
     }
 }
