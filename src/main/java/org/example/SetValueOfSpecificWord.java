@@ -154,50 +154,25 @@ public class SetValueOfSpecificWord extends JPanel implements ActionListener {
         Letter1TextField.setEnabled(true);
         Letter2TextField.setEnabled(true);
         Letter3TextField.setEnabled(true);
-        Letter4TextField.setEnabled(true);
     }
     private void setFourTextFieldActive() {
-        Letter1TextField.setEnabled(true);
-        Letter2TextField.setEnabled(true);
-        Letter3TextField.setEnabled(true);
+        setThreeTextFieldActive();
         Letter4TextField.setEnabled(true);
-        Letter5TextField.setEnabled(true);
     }
     private void setFiveTextFieldActive() {
-        Letter1TextField.setEnabled(true);
-        Letter2TextField.setEnabled(true);
-        Letter3TextField.setEnabled(true);
-        Letter4TextField.setEnabled(true);
+        setFourTextFieldActive();
         Letter5TextField.setEnabled(true);
-        Letter6TextField.setEnabled(true);
     }
     private void setSixTextFieldActive() {
-        Letter1TextField.setEnabled(true);
-        Letter2TextField.setEnabled(true);
-        Letter3TextField.setEnabled(true);
-        Letter4TextField.setEnabled(true);
-        Letter5TextField.setEnabled(true);
+        setFiveTextFieldActive();
         Letter6TextField.setEnabled(true);
-        Letter7TextField.setEnabled(true);
     }
     private void setSevenTextFieldActive() {
-        Letter1TextField.setEnabled(true);
-        Letter2TextField.setEnabled(true);
-        Letter3TextField.setEnabled(true);
-        Letter4TextField.setEnabled(true);
-        Letter5TextField.setEnabled(true);
-        Letter6TextField.setEnabled(true);
+        setSixTextFieldActive();
         Letter7TextField.setEnabled(true);
-        Letter8TextField.setEnabled(true);
     }
     private void setThirteenTextFieldActive() {
-        Letter1TextField.setEnabled(true);
-        Letter2TextField.setEnabled(true);
-        Letter3TextField.setEnabled(true);
-        Letter4TextField.setEnabled(true);
-        Letter5TextField.setEnabled(true);
-        Letter6TextField.setEnabled(true);
-        Letter7TextField.setEnabled(true);
+        setSevenTextFieldActive();
         Letter8TextField.setEnabled(true);
         Letter9TextField.setEnabled(true);
         Letter10TextField.setEnabled(true);
