@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class WordVariable {
-    String numberOfWord;
+    int numberOfWord;
     int lengthOfWord;
-    String verticalOrHorizontal;
+    boolean verticalOrHorizontal;
     int PositionOfFirstCharInXAxis;
     int PositionOfFirstCharInYAxis;
 
-    public WordVariable(String numberOfWord, int lengthOfWord, String verticalOrHorizontal, int positionOfFirstCharInXAxis, int positionOfFirstCharInYAxis) {
+    public WordVariable(int numberOfWord, int lengthOfWord, boolean verticalOrHorizontal, int positionOfFirstCharInXAxis, int positionOfFirstCharInYAxis) {
         this.numberOfWord = numberOfWord;
         this.lengthOfWord = lengthOfWord;
         this.verticalOrHorizontal = verticalOrHorizontal;

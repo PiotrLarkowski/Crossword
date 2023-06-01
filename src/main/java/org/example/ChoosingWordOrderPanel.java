@@ -14,13 +14,16 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
     JLabel textMessageNextToWordChooserPL;
 
     private static ArrayList<WordVariable> getWordVariables() {
-        WordVariable word = new WordVariable("1", 7, "horizontal", 100, 100);
-        WordVariable word2 = new WordVariable("2", 5, "vertical", 100,100);
-        WordVariable word3 = new WordVariable("3", 5, "vertical", 200, 100);
+        WordVariable word;
         ArrayList<WordVariable> allWordsList = new ArrayList<>();
-        allWordsList.add(word);
-        allWordsList.add(word2);
-        allWordsList.add(word3);
+        int[] wordLength = {7,5,5};
+        int[] firstPositionOfXAxis = {100,100,200};
+        int[] firstPositionOfYAxis = {100,100,100};
+        boolean[] VerticalOrHorizontal = {false,true,true};
+        for (int i = 0; i < 3; i++) {
+            word = new WordVariable(i+1,wordLength[i],VerticalOrHorizontal[i],firstPositionOfXAxis[i],firstPositionOfYAxis[i]);
+            allWordsList.add(word);
+        }
         return allWordsList;
     }
 
@@ -89,11 +92,11 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
                     g.fillRect(100 + numberOfRectInWidth, 100 + numberOfRectInHeight, 50, 50);
                 } else {
                     g.drawRect(100 + numberOfRectInWidth, 100 + numberOfRectInHeight, 50, 50);
-                    String selectedWord = wordChooser.getSelectedItem().toString();
+                    int selectedWord = wordChooser.getSelectedIndex()+1;
                     for (int k = 0; k < allWordsList.size(); k++) {
-                        if (allWordsList.get(k).numberOfWord.equals(selectedWord)) {
+                        if (allWordsList.get(k).numberOfWord == selectedWord ) {
                             for (int kk = 0; kk < allWordsList.get(k).lengthOfWord; kk++) {
-                                if(allWordsList.get(k).verticalOrHorizontal.equals("vertical")){
+                                if(allWordsList.get(k).verticalOrHorizontal){
                                     g.setColor(Color.GREEN);
                                     g.fillRect(allWordsList.get(k).PositionOfFirstCharInXAxis, allWordsList.get(k).PositionOfFirstCharInYAxis+(kk *50), 50, 50);
                                     g.setColor(Color.BLACK);
