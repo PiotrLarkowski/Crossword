@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class MainView extends JPanel implements ActionListener {
     static Dimension screenSize;
-    public static JFrame selectOrderFrame;
+    public static JFrame selectOrderFrame, setValueOfWordFrame;
 
     public static ArrayList<String> choseWords = new ArrayList<>();
     private JTextArea chosenWordsTextArea;
     private JLabel chosenWordsLabel;
-    private JButton refreshButton, selectOrderButton, startFillingCrosswordButton;
+    private JButton refreshButton, selectOrderButton, startFillingCrosswordButton, setValueOfWordButton;
     public MainView() {
 
         fillEmptySpacesForChosenWords();
@@ -68,6 +68,21 @@ public class MainView extends JPanel implements ActionListener {
                 });
         add(startFillingCrosswordButton);
         startFillingCrosswordButton.addActionListener(this);
+
+        setValueOfWordButton = new JButton("Set value of specific word / Ustaw konkretne slowa");
+        setValueOfWordButton.setBounds(675,670,400,50);
+        setValueOfWordButton.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            setValueOfWordFrameOpen();
+                        }else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            doExit();
+                        }
+                    }
+                });
+        add(setValueOfWordButton);
+        setValueOfWordButton.addActionListener(this);
 
         chosenWordsTextArea = new JTextArea();
         chosenWordsTextArea.setBounds(1125,150,305,635);
@@ -225,7 +240,27 @@ public class MainView extends JPanel implements ActionListener {
             openChoosingWordOrderPanel();
         }else if(event == startFillingCrosswordButton){
 
+        }else if(event == setValueOfWordButton){
+            setValueOfWordFrameOpen();
         }
+    }
+
+    private void setValueOfWordFrameOpen() {
+        setValueOfWordFrame = new JFrame();
+        setValueOfWordFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setValueOfWordFrame.setResizable(false);
+        setValueOfWordFrame.setTitle("Set word value");
+        setValueOfWordFrame.setUndecorated(true);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+
+        SetValueOfSpecificWord setValueOfWordPanel = new SetValueOfSpecificWord();
+        setValueOfWordPanel.setLayout(null);
+
+        setValueOfWordFrame.add(setValueOfWordPanel, BorderLayout.CENTER);
+
+        setValueOfWordFrame.setLocation(dim.width/2-(this.getSize().width/2/2), dim.height/2-(this.getSize().height/2/2));
+        setValueOfWordFrame.pack();
+        setValueOfWordFrame.setVisible(true);
     }
 
     private void openChoosingWordOrderPanel() {

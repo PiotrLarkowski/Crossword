@@ -74,6 +74,16 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
         for (int i = 0; i < 37; i++) {
             wordChooser.addItem(i + 1);
         }
+        wordChooser.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            repaint();
+                        }else if (e.getKeyCode() == KeyEvent.VK_1) {
+                            wordChooser.setSelectedIndex(0);
+                        }
+                    }
+                });
         add(wordChooser);
 
         textMessageNextToWordChooserEN = new JLabel("Please select the number of looking word");
