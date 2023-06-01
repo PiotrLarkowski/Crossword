@@ -18,11 +18,15 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
     private static ArrayList<WordVariable> getWordVariables() {
         WordVariable word;
         ArrayList<WordVariable> allWordsList = new ArrayList<>();
-        int[] wordLength = {7,5,5,7,5,4,5,5,4,13,7,7};
-        int[] firstPositionOfXAxis = {100,100,200,100,300,400,400,400,500,600,600,600};
-        int[] firstPositionOfYAxis = {100,100,100,200,100,100,150,250,100,100,100,200};
-        boolean[] VerticalOrHorizontal = {false,true,true,false,true,true,false,false,true,true,false,false};
-        for (int i = 0; i < 12; i++) {
+        int[] wordLength = {7,5,5,7,6,5,4,5,5,4,13,7,7,5,7,5,5,7,3,3,7,5,6,5,5,6,6,6,5,7,5,7,5,4,5,4,5};
+        int[] firstPositionOfXAxis = {100,100,200,100,100,300,400,400,400,500,600,600,600,700,600,800,900,600,750,850,450,
+                150,100,250,350,350,350,100,100,100,200,100,300,400,400,500,400};
+        int[] firstPositionOfYAxis = {100,100,100,200,300,100,100,150,250,100,100,100,200,100,300,100,100,400,300,300,250,
+                300,400,300,300,350,450,500,500,600,500,700,500,550,550,550,650};
+        boolean[] VerticalOrHorizontal = {false,true,true,false,false,true,true,false,false,true,true,false,false,true,false,
+                true,true,false,true,true,true,true,false,true,true,false,false,false,true,false,true,false,true,true,
+                false,true,false};
+        for (int i = 0; i < 37; i++) {
             word = new WordVariable(i+1,wordLength[i],VerticalOrHorizontal[i],firstPositionOfXAxis[i],firstPositionOfYAxis[i]);
             allWordsList.add(word);
         }
@@ -67,7 +71,7 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
 
         wordChooser = new JComboBox();
         wordChooser.setBounds(675, 555, 50, 60);
-        for (int i = 0; i < 36; i++) {
+        for (int i = 0; i < 37; i++) {
             wordChooser.addItem(i + 1);
         }
         add(wordChooser);
