@@ -2,10 +2,7 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class MainView extends JPanel implements ActionListener {
@@ -29,11 +26,27 @@ public class MainView extends JPanel implements ActionListener {
 
         refreshButton = new JButton("Refresh / Odswiez");
         refreshButton.setBounds(675,475,400,50);
+        refreshButton.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            repaint();
+                        }
+                    }
+                });
         add(refreshButton);
         refreshButton.addActionListener(this);
 
         selectOrderButton = new JButton("Choice the word order / Wybierz kolejnosc wybierania slow");
         selectOrderButton.setBounds(675,540,400,50);
+        selectOrderButton.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            openChoosingWordOrderPanel();
+                        }
+                    }
+                });
         add(selectOrderButton);
         selectOrderButton.addActionListener(this);
 
@@ -45,6 +58,7 @@ public class MainView extends JPanel implements ActionListener {
         chosenWordsTextArea = new JTextArea();
         chosenWordsTextArea.setBounds(1125,150,305,635);
         chosenWordsTextArea.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        chosenWordsTextArea.setFocusable(false);
         add(chosenWordsTextArea);
 
         chosenWordsLabel = new JLabel("Chosen Words");
@@ -52,6 +66,7 @@ public class MainView extends JPanel implements ActionListener {
         chosenWordsLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
         add(chosenWordsLabel);
 
+        MainCrossword.window.getRootPane().setDefaultButton(refreshButton);
     }
 
     private static void fillEmptySpacesForChosenWords() {
@@ -193,25 +208,29 @@ public class MainView extends JPanel implements ActionListener {
             inputChosenWordsIntoTextAreaFields();
             repaint();
         }else if(event == selectOrderButton){
-            MainCrossword.window.setVisible(false);
-            selectOrderFrame = new JFrame();
-            selectOrderFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            selectOrderFrame.setResizable(false);
-            selectOrderFrame.setTitle("Choosing words order");
-            selectOrderFrame.setUndecorated(true);
-            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-            selectOrderFrame.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-
-            ChoosingWordOrderPanel choosingWordOrderPanel = new ChoosingWordOrderPanel();
-            choosingWordOrderPanel.setLayout(null);
-
-            selectOrderFrame.add(choosingWordOrderPanel, BorderLayout.CENTER);
-
-            selectOrderFrame.pack();
-            selectOrderFrame.setVisible(true);
+            openChoosingWordOrderPanel();
         }else if(event == startFillingCrosswordButton){
 
         }
 
+    }
+
+    private void openChoosingWordOrderPanel() {
+        MainCrossword.window.setVisible(false);
+        selectOrderFrame = new JFrame();
+        selectOrderFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        selectOrderFrame.setResizable(false);
+        selectOrderFrame.setTitle("Choosing words order");
+        selectOrderFrame.setUndecorated(true);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        selectOrderFrame.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+
+        ChoosingWordOrderPanel choosingWordOrderPanel = new ChoosingWordOrderPanel();
+        choosingWordOrderPanel.setLayout(null);
+
+        selectOrderFrame.add(choosingWordOrderPanel, BorderLayout.CENTER);
+
+        selectOrderFrame.pack();
+        selectOrderFrame.setVisible(true);
     }
 }

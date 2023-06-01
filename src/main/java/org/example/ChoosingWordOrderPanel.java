@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,11 +18,11 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
     private static ArrayList<WordVariable> getWordVariables() {
         WordVariable word;
         ArrayList<WordVariable> allWordsList = new ArrayList<>();
-        int[] wordLength = {7,5,5};
-        int[] firstPositionOfXAxis = {100,100,200};
-        int[] firstPositionOfYAxis = {100,100,100};
-        boolean[] VerticalOrHorizontal = {false,true,true};
-        for (int i = 0; i < 3; i++) {
+        int[] wordLength = {7,5,5,7,5,4,5,5,4,13,7,7};
+        int[] firstPositionOfXAxis = {100,100,200,100,300,400,400,400,500,600,600,600};
+        int[] firstPositionOfYAxis = {100,100,100,200,100,100,150,250,100,100,100,200};
+        boolean[] VerticalOrHorizontal = {false,true,true,false,true,true,false,false,true,true,false,false};
+        for (int i = 0; i < 12; i++) {
             word = new WordVariable(i+1,wordLength[i],VerticalOrHorizontal[i],firstPositionOfXAxis[i],firstPositionOfYAxis[i]);
             allWordsList.add(word);
         }
@@ -37,12 +39,29 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
 
         backButton = new JButton("Back / Powrot");
         backButton.setBounds(675, 475, 400, 50);
+        backButton.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            MainView.selectOrderFrame.dispose();
+                            MainCrossword.window.setVisible(true);
+                        }
+                    }
+                });
         add(backButton);
         backButton.addActionListener(this);
 
 
         showButton = new JButton("Show position / Pokaz pozycje");
         showButton.setBounds(675, 640, 400, 50);
+        showButton.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            repaint();
+                        }
+                    }
+                });
         add(showButton);
         showButton.addActionListener(this);
 
