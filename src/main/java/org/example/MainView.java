@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class MainView extends JPanel implements ActionListener {
     static Dimension screenSize;
     public static JFrame selectOrderFrame, setValueOfWordFrame;
-
     public static ArrayList<String> choseWords = new ArrayList<>();
     private JTextArea chosenWordsTextArea;
     private JLabel chosenWordsLabel;
@@ -90,8 +89,8 @@ public class MainView extends JPanel implements ActionListener {
         chosenWordsTextArea.setFocusable(false);
         add(chosenWordsTextArea);
 
-        chosenWordsLabel = new JLabel("Chosen Words");
-        chosenWordsLabel.setBounds(1225,100,200,30);
+        chosenWordsLabel = new JLabel("Chosen Words / Wybrane slowa");
+        chosenWordsLabel.setBounds(1155,100,300,30);
         chosenWordsLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
         add(chosenWordsLabel);
 
@@ -221,10 +220,10 @@ public class MainView extends JPanel implements ActionListener {
             countOfSpaces = 66 - choseWords.get(i).length();
             chosenWordsTextArea.setText(chosenWordsTextArea.getText() + i + ":");
             for(int j = 0; j< countOfSpaces/2;j++)
-                chosenWordsTextArea.setText(chosenWordsTextArea.getText() + "-");
+                chosenWordsTextArea.setText(chosenWordsTextArea.getText() + " ");
             chosenWordsTextArea.setText(chosenWordsTextArea.getText() + choseWords.get(i));
             for(int j = 0; j< countOfSpaces/2-3;j++)
-                chosenWordsTextArea.setText(chosenWordsTextArea.getText() + "-");
+                chosenWordsTextArea.setText(chosenWordsTextArea.getText() + " ");
             chosenWordsTextArea.setText(chosenWordsTextArea.getText() + "\n");
 
         }
