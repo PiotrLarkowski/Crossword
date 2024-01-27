@@ -12,6 +12,9 @@ public class MainView extends JPanel implements ActionListener {
     private JTextArea chosenWordsTextArea;
     private JLabel chosenWordsLabel;
     private JButton refreshButton, selectOrderButton, startFillingCrosswordButton, setValueOfWordButton;
+    public static ArrayList<WordVariable> allWordsList = getWordVariables();
+    public static ArrayList<String> pickedWords = new ArrayList<>();
+
     public MainView() {
 
         fillEmptySpacesForChosenWords();
@@ -228,7 +231,23 @@ public class MainView extends JPanel implements ActionListener {
 
         }
     }
-
+    private static ArrayList<WordVariable> getWordVariables() {
+        WordVariable word;
+        ArrayList<WordVariable> allWordsList = new ArrayList<>();
+        int[] wordLength = {7,5,5,7,6,5,4,5,5,4,13,7,7,5,7,5,5,7,3,3,7,5,6,5,5,6,6,6,5,7,5,7,5,4,5,4,5};
+        int[] firstPositionOfXAxis = {100,100,200,100,100,300,400,400,400,500,600,600,600,700,600,800,900,600,750,850,450,
+                150,100,250,350,350,350,100,100,100,200,100,300,400,400,500,400};
+        int[] firstPositionOfYAxis = {100,100,100,200,300,100,100,150,250,100,100,100,200,100,300,100,100,400,300,300,250,
+                300,400,300,300,350,450,500,500,600,500,700,500,550,550,550,650};
+        boolean[] VerticalOrHorizontal = {false,true,true,false,false,true,true,false,false,true,true,false,false,true,false,
+                true,true,false,true,true,true,true,false,true,true,false,false,false,true,false,true,false,true,true,
+                false,true,false};
+        for (int i = 0; i < 37; i++) {
+            word = new WordVariable(i+1,wordLength[i],VerticalOrHorizontal[i],firstPositionOfXAxis[i],firstPositionOfYAxis[i]);
+            allWordsList.add(word);
+        }
+        return allWordsList;
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         Object event = e.getSource();
@@ -238,7 +257,8 @@ public class MainView extends JPanel implements ActionListener {
         }else if(event == selectOrderButton){
             openChoosingWordOrderPanel();
         }else if(event == startFillingCrosswordButton){
-
+            FindingWords findingWords = new FindingWords(allWordsList);
+            pickedWords = findingWords.run();
         }else if(event == setValueOfWordButton){
             setValueOfWordFrameOpen();
         }

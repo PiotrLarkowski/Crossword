@@ -17,4 +17,13 @@ public class WordVariable {
         PositionOfFirstCharInXAxis = positionOfFirstCharInXAxis;
         PositionOfFirstCharInYAxis = positionOfFirstCharInYAxis;
     }
+
+    @Override
+    public String toString() {
+        return "Word number " + numberOfWord + "," +
+                "Word length " + lengthOfWord +" ," +
+                "Horizontal position " + verticalOrHorizontal + " ,"+
+                "Starting position X " + PositionOfFirstCharInXAxis + " ,"+
+                "Starting position Y " + PositionOfFirstCharInYAxis;
+    }
 }
