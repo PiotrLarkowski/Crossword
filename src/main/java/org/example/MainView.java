@@ -221,7 +221,7 @@ public class MainView extends JPanel implements ActionListener {
         int countOfSpaces;
         for(int i=0;i<choseWords.size();i++){
             countOfSpaces = 66 - choseWords.get(i).length();
-            chosenWordsTextArea.setText(chosenWordsTextArea.getText() + i + ":");
+            chosenWordsTextArea.setText(chosenWordsTextArea.getText() + (i+1) + ":");
             for(int j = 0; j< countOfSpaces/2;j++)
                 chosenWordsTextArea.setText(chosenWordsTextArea.getText() + " ");
             chosenWordsTextArea.setText(chosenWordsTextArea.getText() + choseWords.get(i));
