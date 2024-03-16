@@ -257,6 +257,8 @@ public class MainView extends JPanel implements ActionListener {
         }else if(event == selectOrderButton){
             openChoosingWordOrderPanel();
         }else if(event == startFillingCrosswordButton){
+            JOptionPane.showMessageDialog(null, "Select word directory/Wybierz katalog slow",
+                    "Information", JOptionPane.INFORMATION_MESSAGE);
             FindingWords findingWords = new FindingWords(allWordsList);
             pickedWords = findingWords.run();
         }else if(event == setValueOfWordButton){

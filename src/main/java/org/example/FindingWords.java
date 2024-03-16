@@ -76,7 +76,6 @@ public class FindingWords {
                 System.out.println("Read File Problem");
             }
         }
-        System.out.println(allWords);
         return allWords;
     }
 }
