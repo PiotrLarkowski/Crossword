@@ -22,9 +22,11 @@ public class FindingWords {
 //        System.out.println(allWordsInformation.get(0).toString());
 //        System.out.println(parametersOfWords.get(0).toString());
         Random random = new Random();
+        int maxRandomValue = allWords.size();
+        int minRandomValue = 0;
         for (int i = 0; i < 8; i++) {
             WordsConnection presentWordParameters = parametersOfWords.get(i);
-            String presentWord = allWords.get(random.nextInt(allWords.size()));
+            String presentWord = allWords.get(random.nextInt((maxRandomValue-minRandomValue+1)+minRandomValue));
             for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
                 if(presentWord.length()==allWordsInformation.get(j).lengthOfWord) {
                     try {
