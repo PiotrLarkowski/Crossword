@@ -16,42 +16,32 @@ public class FindingWords {
     public FindingWords(ArrayList<WordVariable> allWordsInfo) {
         allWordsInformation = allWordsInfo;
         allWordsInCrossword = downloadWordsFile();
-        filingEndWordsListWithEmptySpaces();
     }
 
-    private void filingEndWordsListWithEmptySpaces(){
-        StringBuilder spaces = new StringBuilder();
-        for (int i = 0; i < 37; i++) {
-            for (int j = 0; j < allWordsInformation.get(i).lengthOfWord; j++) {
-                spaces.append(" ");
-            }
-            selectedWordsToCrossword.add(i,spaces.toString());
-            spaces.setLength(0);
-        }
-    }
     public static ArrayList<String> run() {
         ArrayList<String> pickedWords = new ArrayList<>();
 
         System.out.println(allWordsInformation.get(0).toString());
         System.out.println(parametersOfWords.get(0).toString());
-        System.out.println(allWordsInformation.size());
 
         Random random = new Random();
         int maxRandomValue = allWordsInCrossword.size();
         int minRandomValue = 0;
         boolean wordPass = true;
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 7; i++) {
             WordsConnection presentWordParameters = parametersOfWords.get(i);
             String presentWord;
             do {
                 presentWord = allWordsInCrossword.get(random.nextInt((maxRandomValue - minRandomValue) + minRandomValue));
             } while (presentWord.length() != allWordsInformation.get(i).lengthOfWord);
             for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
-                if(selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)).trim().isEmpty()){
-                    wordPass = true;
-                }else{
+                try{
+                    String firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j));
                     wordPass = false;
+                }catch(IndexOutOfBoundsException ignored){
+                    wordPass = true;
+                    break;
                 }
             }
             if(wordPass){
