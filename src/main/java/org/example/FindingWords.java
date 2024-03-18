@@ -37,11 +37,10 @@ public class FindingWords {
             } while (presentWord.length() != allWordsInformation.get(i).lengthOfWord);
             for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
                 try{
-                    String firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j));
+                    String firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)-1);
                     wordPass = false;
                 }catch(IndexOutOfBoundsException ignored){
                     wordPass = true;
-                    break;
                 }
             }
             if(wordPass){
