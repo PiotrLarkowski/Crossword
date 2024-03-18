@@ -19,7 +19,6 @@ public class FindingWords {
     }
 
     public static ArrayList<String> run() {
-        ArrayList<String> pickedWords = new ArrayList<>();
 
         System.out.println(allWordsInformation.get(0).toString());
         System.out.println(parametersOfWords.get(0).toString());
@@ -38,7 +37,12 @@ public class FindingWords {
             for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
                 try{
                     String firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)-1);
-                    wordPass = false;
+                    if(presentWord.charAt(presentWordParameters.numberOfLettersInWordConnectedToConnectedWords.get(j))==
+                            firstWordToFit.charAt(presentWordParameters.numberOfPositionInConnectedWords.get(j))){
+                        wordPass = true;
+                    }else{
+                        wordPass = false;
+                    }
                 }catch(IndexOutOfBoundsException ignored){
                     wordPass = true;
                 }
@@ -49,7 +53,7 @@ public class FindingWords {
                 System.out.println("Searching the word");
             }
         }
-        return (pickedWords);
+        return (selectedWordsToCrossword);
     }
 
     public static ArrayList<String> downloadWordsFile() {
