@@ -31,14 +31,12 @@ public class FindingWords {
         for (int i = 0; i < 7; i++) {
             WordsConnection presentWordParameters = parametersOfWords.get(i);
             String presentWord;
-            do {
-                presentWord = allWordsInCrossword.get(random.nextInt((maxRandomValue - minRandomValue) + minRandomValue));
-            } while (presentWord.length() != allWordsInformation.get(i).lengthOfWord);
+            presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
             for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
                 try{
                     String firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)-1);
-                    if(presentWord.charAt(presentWordParameters.numberOfLettersInWordConnectedToConnectedWords.get(j))==
-                            firstWordToFit.charAt(presentWordParameters.numberOfPositionInConnectedWords.get(j))){
+                    if(presentWord.charAt(presentWordParameters.numberOfLettersInWordConnectedToConnectedWords.get(j)-1)==
+                            firstWordToFit.charAt(presentWordParameters.numberOfPositionInConnectedWords.get(j)-1)){
                         wordPass = true;
                     }else{
                         wordPass = false;
@@ -46,14 +44,25 @@ public class FindingWords {
                 }catch(IndexOutOfBoundsException ignored){
                     wordPass = true;
                 }
+                if(!wordPass){
+                    presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
+                }
             }
             if(wordPass){
-                selectedWordsToCrossword.add(i,presentWord);
+                selectedWordsToCrossword.add(presentWord);
             }else{
                 System.out.println("Searching the word");
             }
         }
         return (selectedWordsToCrossword);
+    }
+
+    private static String wordDraw(Random random, int maxRandomValue, int minRandomValue, int i) {
+        String presentWord;
+        do {
+            presentWord = allWordsInCrossword.get(random.nextInt((maxRandomValue - minRandomValue) + minRandomValue));
+        } while (presentWord.length() != allWordsInformation.get(i).lengthOfWord);
+        return presentWord;
     }
 
     public static ArrayList<String> downloadWordsFile() {
