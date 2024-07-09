@@ -22,48 +22,48 @@ public class FindingWords {
         Random random = new Random();
         int maxRandomValue = allWordsInCrossword.size();
         int minRandomValue = 0;
-        Boolean wordExist;
         boolean wordPass = true;
         int numberOfAttempts = 50;
 
         for (int i = 0; i < 7; i++) {
             WordsConnection presentWordParameters = parametersOfWords.get(i);
             String presentWord;
+            String firstWordToFit;
             presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
             numberOfAttempts--;
             for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
-                wordExist = false;
-                try{
-                    String firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)-1);
-                    wordExist = true;
-                }catch(Exception ignored){
-                    wordExist = false;
-                }
-                if(wordExist){
-                    String firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)-1);
-                    if(presentWord.charAt(presentWordParameters.numberOfLettersInWordConnectedToConnectedWords.get(j)-1)==
-                            firstWordToFit.charAt(presentWordParameters.numberOfPositionInConnectedWords.get(j)-1)){
+                try {
+                    firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j) - 1);
+                } catch (Exception ignored) {
+                    if(j == presentWordParameters.numberOfConnectedWords-1){
                         wordPass = true;
                     }else{
-                        wordPass = false;
+                        selectedWordsToCrossword.add(presentWord);
+                        numberOfAttempts = 50;
                     }
                 }
-                if(!wordPass){
+                firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j) - 1);
+                if (presentWord.charAt(presentWordParameters.numberOfLettersInWordConnectedToConnectedWords.get(j) - 1) ==
+                        firstWordToFit.charAt(presentWordParameters.numberOfPositionInConnectedWords.get(j) - 1)) {
+                    wordPass = true;
+                } else {
+                    wordPass = false;
+                }
+                if (!wordPass) {
                     presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
                     numberOfAttempts--;
-                    if(numberOfAttempts < 1){
+                    if (numberOfAttempts < 1) {
                         numberOfAttempts = 50;
-                        i=-1;
+                        i = 0;
                         break;
                     }
                 }
             }
-            if(wordPass){
+            if (wordPass) {
                 selectedWordsToCrossword.add(presentWord);
                 numberOfAttempts = 50;
-            }else{
+            } else {
                 i--;
-                wordExist = false;
             }
         }
         return (selectedWordsToCrossword);
