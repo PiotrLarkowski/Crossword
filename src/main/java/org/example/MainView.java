@@ -178,12 +178,12 @@ public class MainView extends JPanel implements ActionListener {
     }
 
     private static void inputLettersIntoCrossword(Graphics g) {
-       int[] firstValueInWordsOfXCoordinate = {125,125,225,125,325,125,425,425,425,525,625,625,625,725,625,825,925,625,775,875,475,175,125,275,375,375,375,125,125,125,225,125,325,425,425,525,425};
-       int[] firstValueInWordsOfYCoordinate = {125,125,125,225,125,325,125,175,275,125,125,125,225,125,325,125,125,425,325,325,275,325,425,325,325,375,475,525,525,625,525,725,525,575,575,575,675};
+       int[] firstValueInWordsOfXCoordinate = {125,125,225,125,125,325,425,425,425,525,625,625,625,725,625,825,925,625,775,875,475,175,125,275,375,375,375,125,125,125,225,125,325,425,425,525,425};
+       int[] firstValueInWordsOfYCoordinate = {125,125,125,225,325,125,125,175,275,125,125,125,225,125,325,125,125,425,325,325,275,325,425,325,325,375,475,525,525,625,525,725,525,575,575,575,675};
 
         int verticalValue = 0;
         int horizontallyValue = 0;
-        boolean[] wordIsInVertical = {false,true,true,false,true,false,true,false,false,true,true,false,false,true,false,
+        boolean[] wordIsInVertical = {false,true,true,false,false,true,true,false,false,true,true,false,false,true,false,
         true,true,false,true,true,true,true,false,true,true,false,false,false,true,false,true,false,true,true,false,true,false};
         for(int i=0; i<choseWords.size();i++){
             verticalValue = 0;
