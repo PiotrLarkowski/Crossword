@@ -261,6 +261,7 @@ public class MainView extends JPanel implements ActionListener {
                     "Information", JOptionPane.INFORMATION_MESSAGE);
             FindingWords findingWords = new FindingWords(allWordsList);
             pickedWords = findingWords.run();
+            choseWords = pickedWords;
         }else if(event == setValueOfWordButton){
             setValueOfWordFrameOpen();
         }
