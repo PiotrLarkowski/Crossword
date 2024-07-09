@@ -20,12 +20,13 @@ public class FindingWords {
 
     public static ArrayList<String> run() {
 
-        System.out.println(allWordsInformation.get(0).toString());
-        System.out.println(parametersOfWords.get(0).toString());
+//        System.out.println(allWordsInformation.get(0).toString());
+//        System.out.println(parametersOfWords.get(0).toString());
 
         Random random = new Random();
         int maxRandomValue = allWordsInCrossword.size();
         int minRandomValue = 0;
+        Boolean wordExist;
         boolean wordPass = true;
 
         for (int i = 0; i < 7; i++) {
@@ -33,7 +34,14 @@ public class FindingWords {
             String presentWord;
             presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
             for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
+                wordExist = false;
                 try{
+                    String firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)-1);
+                    wordExist = true;
+                }catch(Exception ignored){
+                    wordExist = false;
+                }
+                if(wordExist){
                     String firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)-1);
                     if(presentWord.charAt(presentWordParameters.numberOfLettersInWordConnectedToConnectedWords.get(j)-1)==
                             firstWordToFit.charAt(presentWordParameters.numberOfPositionInConnectedWords.get(j)-1)){
@@ -41,8 +49,6 @@ public class FindingWords {
                     }else{
                         wordPass = false;
                     }
-                }catch(IndexOutOfBoundsException ignored){
-                    wordPass = true;
                 }
                 if(!wordPass){
                     presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
@@ -51,7 +57,9 @@ public class FindingWords {
             if(wordPass){
                 selectedWordsToCrossword.add(presentWord);
             }else{
-                System.out.println("Searching the word");
+                i--;
+                wordExist = false;
+//                System.out.println("Not match. Searching the word");
             }
         }
         return (selectedWordsToCrossword);
