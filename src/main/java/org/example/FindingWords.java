@@ -19,20 +19,18 @@ public class FindingWords {
     }
 
     public static ArrayList<String> run() {
-
-//        System.out.println(allWordsInformation.get(0).toString());
-//        System.out.println(parametersOfWords.get(0).toString());
-
         Random random = new Random();
         int maxRandomValue = allWordsInCrossword.size();
         int minRandomValue = 0;
         Boolean wordExist;
         boolean wordPass = true;
+        int numberOfAttempts = 50;
 
         for (int i = 0; i < 7; i++) {
             WordsConnection presentWordParameters = parametersOfWords.get(i);
             String presentWord;
             presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
+            numberOfAttempts--;
             for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
                 wordExist = false;
                 try{
@@ -52,14 +50,19 @@ public class FindingWords {
                 }
                 if(!wordPass){
                     presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
+                    numberOfAttempts--;
+                    if(numberOfAttempts == 0){
+                        numberOfAttempts = 50;
+                        i--;
+                        break;
+                    }
                 }
             }
             if(wordPass){
                 selectedWordsToCrossword.add(presentWord);
             }else{
-                i--;
+                i=-1;
                 wordExist = false;
-//                System.out.println("Not match. Searching the word");
             }
         }
         return (selectedWordsToCrossword);

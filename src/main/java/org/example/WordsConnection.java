@@ -27,9 +27,9 @@ public class WordsConnection {
         wordsParameters.add(new WordsConnection(2,3,Arrays.asList(false,false,false), Arrays.asList(1,3,5),Arrays.asList(1,4,5),Arrays.asList(1,1,1)));
         wordsParameters.add(new WordsConnection(3,3,Arrays.asList(false,false,false), Arrays.asList(1,3,5),Arrays.asList(1,4,5),Arrays.asList(3,3,3)));
         wordsParameters.add(new WordsConnection(4,4,Arrays.asList(true,true,true,true), Arrays.asList(1,3,5,7),Arrays.asList(2,3,6,7),Arrays.asList(3,3,3,3)));
-        wordsParameters.add(new WordsConnection(5,5,Arrays.asList(true,true,true), Arrays.asList(1,3,5),Arrays.asList(2,3,6),Arrays.asList(5,5,5)));
+        wordsParameters.add(new WordsConnection(5,3,Arrays.asList(true,true,true), Arrays.asList(1,3,5),Arrays.asList(2,3,6),Arrays.asList(5,5,5)));
         wordsParameters.add(new WordsConnection(6,3,Arrays.asList(false,false,false), Arrays.asList(1,3,5),Arrays.asList(1,4,5),Arrays.asList(5,5,5)));
-        wordsParameters.add(new WordsConnection(7,2,Arrays.asList(false,false), Arrays.asList(1,3),Arrays.asList(1,4),Arrays.asList(7,7)));
+        wordsParameters.add(new WordsConnection(7,4,Arrays.asList(false,false), Arrays.asList(1,3),Arrays.asList(1,4),Arrays.asList(7,7)));
         return wordsParameters;
     }
 
