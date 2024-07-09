@@ -51,7 +51,7 @@ public class FindingWords {
                 if(!wordPass){
                     presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
                     numberOfAttempts--;
-                    if(numberOfAttempts == 0){
+                    if(numberOfAttempts < 1){
                         numberOfAttempts = 50;
                         i=-1;
                         break;
@@ -60,6 +60,7 @@ public class FindingWords {
             }
             if(wordPass){
                 selectedWordsToCrossword.add(presentWord);
+                numberOfAttempts = 50;
             }else{
                 i--;
                 wordExist = false;
