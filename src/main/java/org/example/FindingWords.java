@@ -53,7 +53,7 @@ public class FindingWords {
                     numberOfAttempts--;
                     if(numberOfAttempts == 0){
                         numberOfAttempts = 50;
-                        i--;
+                        i=-1;
                         break;
                     }
                 }
@@ -61,7 +61,7 @@ public class FindingWords {
             if(wordPass){
                 selectedWordsToCrossword.add(presentWord);
             }else{
-                i=-1;
+                i--;
                 wordExist = false;
             }
         }
