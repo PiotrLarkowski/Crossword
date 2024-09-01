@@ -26,7 +26,8 @@ public class FindingWords {
         boolean wordDoNotFit = false;
         int numberOfAttempts = 50;
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 13; i++) {
+//            WordsConnection presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(i));
             WordsConnection presentWordParameters = parametersOfWords.get(i);
             String presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
             String firstWordToFit;
