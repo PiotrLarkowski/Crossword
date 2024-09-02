@@ -3,6 +3,7 @@ package org.example;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,16 +21,14 @@ public class FindingWords {
 
     public static ArrayList<String> run() {
         Random random = new Random();
-        int maxRandomValue = allWordsInCrossword.size();
-        int minRandomValue = 0;
         boolean wordPass = true;
         boolean wordDoNotFit = false;
         int numberOfAttempts = 50;
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 7; i++) {
 //            WordsConnection presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(i));
             WordsConnection presentWordParameters = parametersOfWords.get(i);
-            String presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
+            String presentWord = wordDraw(random, i);
             String firstWordToFit;
             numberOfAttempts--;
             for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
@@ -43,7 +42,7 @@ public class FindingWords {
                         wordPass = false;
                     }
                     if (!wordPass) {
-                        presentWord = wordDraw(random, maxRandomValue, minRandomValue, i);
+                        presentWord = wordDraw(random, i);
                         numberOfAttempts--;
                         if (numberOfAttempts < 1) {
                             numberOfAttempts = 50;
@@ -72,11 +71,18 @@ public class FindingWords {
         return (selectedWordsToCrossword);
     }
 
-    private static String wordDraw(Random random, int maxRandomValue, int minRandomValue, int i) {
+    private static String wordDraw(Random random, int i) {
         String presentWord;
-        do {
-            presentWord = allWordsInCrossword.get(random.nextInt((maxRandomValue - minRandomValue) + minRandomValue));
-        } while (presentWord.length() != allWordsInformation.get(i).lengthOfWord);
+        int minRandomValue = 0;
+        int maxRandomValue;
+        List<String> currentListOfSize = new ArrayList<>();
+        for (int j = 0; j < allWordsInCrossword.size(); j++) {
+            if(allWordsInCrossword.get(j).length()==allWordsInformation.get(i).lengthOfWord){
+                currentListOfSize.add(allWordsInCrossword.get(j));
+            }
+        }
+        maxRandomValue = currentListOfSize.size();
+        presentWord = currentListOfSize.get(random.nextInt((maxRandomValue - minRandomValue) + minRandomValue));
         return presentWord;
     }
 
