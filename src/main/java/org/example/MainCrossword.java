@@ -15,6 +15,10 @@ public class MainCrossword extends JFrame {
 
     public static void main(String[] args) {
 
+        for (int i = 0; i < 37; i++) {
+            MainCrossword.mainOrderOfSearchingWords.set(i,i);
+        }
+
         window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);

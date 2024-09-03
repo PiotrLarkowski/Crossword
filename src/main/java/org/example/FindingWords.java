@@ -20,8 +20,8 @@ public class FindingWords {
         boolean wordPass = true;
         int numberOfReturn = 3;
         for (int i = 0; i < 37; i++) {
-//            WordsConnection presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(i));
-            WordsConnection presentWordParameters = parametersOfWords.get(i);
+            WordsConnection presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(i));
+//            WordsConnection presentWordParameters = parametersOfWords.get(i);
             ArrayList<String> presentsWordsOfGivenLength = wordDraw(i);
             String firstWordToFit;
             String presentWord = null;

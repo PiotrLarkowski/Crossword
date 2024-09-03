@@ -149,7 +149,6 @@ public class SetValueOfSpecificWord extends JPanel implements ActionListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         g.setColor(Color.white);
         g.fillRect(50, 50, 700, 400);
     }
@@ -168,13 +167,6 @@ public class SetValueOfSpecificWord extends JPanel implements ActionListener {
         setAllTextFieldDisabled();
         int[][] numbersOfWordsWithSameLetters = {{1,4,12,13,15,21,30,32},{2,3,6,8,9,14,16,17,22,24,25,29,31,33,35,37},
                 {5,23,26,27,28},{7,10,34,36},{19,20}};
-//        for (int i = 0; i < 5; i++) {
-//            for (int j = 0; j < numbersOfWordsWithSameLetters[i].length; j++) {
-//                if(wordChooser.getSelectedItem().equals(numbersOfWordsWithSameLetters[i][j])){
-//                    setTextFieldActive(i);
-//                }
-//            }
-//        }
         int[] numbersOfWordsWithSevenLetters = {1,4,12,13,15,21,30,32};
         int[] numbersOfWordsWithFiveLetters = {2,3,6,8,9,14,16,17,22,24,25,29,31,33,35,37};
         int[] numbersOfWordsWithSixLetters = {5,23,26,27,28};
@@ -227,8 +219,8 @@ public class SetValueOfSpecificWord extends JPanel implements ActionListener {
                 stringBuilder.append(textFieldList.get(i).getText());
             }
         }
-        JOptionPane.showMessageDialog(this, "Value has been set / Wartosc zostala ustawiona");
         MainView.choseWords.set(wordChooser.getSelectedIndex(), stringBuilder.toString());
+        JOptionPane.showMessageDialog(this, "Value has been set / Wartosc zostala ustawiona");
     }
     @Override
     public void actionPerformed(ActionEvent e) {
