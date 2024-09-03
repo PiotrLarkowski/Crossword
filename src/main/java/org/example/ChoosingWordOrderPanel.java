@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
-    JButton backButton, showButton, applyChangeButton;
+    JButton backButton, showButton, applyChangeButton, defaultPositionButton;
     JComboBox wordChooser, wordChooserSecond, wordChooserThird;
     JLabel textMessageNextToWordChooserEN;
     JLabel textMessageNextToWordChooserPL;
@@ -53,6 +53,19 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
                 });
         add(showButton);
         showButton.addActionListener(this);
+
+        defaultPositionButton = new JButton("Reset position / Resetoj pozycje");
+        defaultPositionButton.setBounds(795, 750, 400, 50);
+        defaultPositionButton.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            repaint();
+                        }
+                    }
+                });
+        add(defaultPositionButton);
+        defaultPositionButton.addActionListener(this);
 
         wordChooser = new JComboBox();
         wordChooser.setBounds(815, 555, 50, 60);
@@ -224,6 +237,12 @@ public class ChoosingWordOrderPanel extends JPanel implements ActionListener{
                 }
             }
             Collections.swap(MainCrossword.mainOrderOfSearchingWords,selectedPositionByUser,positionOfWordInAccualOrder);
+            currentOrderNumberOrder.setText("");
+            printOnScreanOrderOfWords();
+        }else if(event == defaultPositionButton){
+            for (int i = 0; i < 37; i++) {
+                MainCrossword.mainOrderOfSearchingWords.set(i,i);
+            }
             currentOrderNumberOrder.setText("");
             printOnScreanOrderOfWords();
         }
