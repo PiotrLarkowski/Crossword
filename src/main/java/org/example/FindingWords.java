@@ -18,8 +18,8 @@ public class FindingWords {
 
     public static ArrayList<String> run() {
         boolean wordPass = true;
-
-        for (int i = 0; i < 23; i++) {
+        int numberOfReturn = 3;
+        for (int i = 0; i < 37; i++) {
 //            WordsConnection presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(i));
             WordsConnection presentWordParameters = parametersOfWords.get(i);
             ArrayList<String> presentsWordsOfGivenLength = wordDraw(i);
@@ -48,9 +48,19 @@ public class FindingWords {
                 }
             }
             if(!wordPass){
-                selectedWordsToCrossword.clear();
-                wordPass = true;
-                i=-1;
+                if(numberOfReturn==0){
+                    selectedWordsToCrossword.clear();
+                    wordPass = true;
+                    numberOfReturn=3;
+                    i=-1;
+                }
+                for (int j = 0; j < 4; j++) {
+                    if(i>0){
+                        selectedWordsToCrossword.remove(i-1);
+                        i=i-2;
+                    }
+                }
+                numberOfReturn--;
             }
         }
         JOptionPane.showMessageDialog(MainCrossword.window,"End searching/Koniec wyszkiwania");
