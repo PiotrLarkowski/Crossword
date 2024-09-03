@@ -11,7 +11,7 @@ public class MainView extends JPanel implements ActionListener {
     public static ArrayList<String> choseWords = new ArrayList<>();
     private JTextArea chosenWordsTextArea;
     private JLabel chosenWordsLabel;
-    private JButton refreshButton, selectOrderButton, startFillingCrosswordButton, setValueOfWordButton;
+    private JButton refreshButton, selectOrderButton, startFillingCrosswordButton, setValueOfWordButton, clearButton;
     public static ArrayList<WordVariable> allWordsList = getWordVariables();
     public static ArrayList<String> pickedWords = new ArrayList<>();
 
@@ -85,6 +85,21 @@ public class MainView extends JPanel implements ActionListener {
                 });
         add(setValueOfWordButton);
         setValueOfWordButton.addActionListener(this);
+
+        clearButton = new JButton("Clear crossword / Wyczysc krzyzowke");
+        clearButton.setBounds(675,730,400,50);
+        clearButton.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            setValueOfWordFrameOpen();
+                        }else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            doExit();
+                        }
+                    }
+                });
+        add(clearButton);
+        clearButton.addActionListener(this);
 
         chosenWordsTextArea = new JTextArea();
         chosenWordsTextArea.setBounds(1125,150,305,635);
@@ -264,6 +279,10 @@ public class MainView extends JPanel implements ActionListener {
             choseWords = pickedWords;
         }else if(event == setValueOfWordButton){
             setValueOfWordFrameOpen();
+        }else if(event == clearButton){
+            choseWords.clear();
+            inputChosenWordsIntoTextAreaFields();
+            repaint();
         }
     }
 
