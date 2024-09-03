@@ -25,7 +25,7 @@ public class FindingWords {
         boolean wordDoNotFit = false;
         int numberOfAttempts = 50;
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 13; i++) {
 //            WordsConnection presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(i));
             WordsConnection presentWordParameters = parametersOfWords.get(i);
             String presentWord = wordDraw(random, i);
@@ -46,7 +46,9 @@ public class FindingWords {
                         numberOfAttempts--;
                         if (numberOfAttempts < 1) {
                             numberOfAttempts = 50;
+                            selectedWordsToCrossword.clear();
                             i = 0;
+                            wordPass = true;
                             break;
                         }
                     }
@@ -64,10 +66,13 @@ public class FindingWords {
                 if(numberOfAttempts < 1){
                     numberOfAttempts = 50;
                     i = 0;
+                    selectedWordsToCrossword.clear();
+                    wordPass = true;
                 }
                 i--;
             }
         }
+        JOptionPane.showMessageDialog(MainCrossword.window,"End searching/Koniec wyszkiwania");
         return (selectedWordsToCrossword);
     }
 
