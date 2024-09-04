@@ -66,16 +66,16 @@ public class FindingWords {
         JOptionPane.showMessageDialog(MainCrossword.window,"End searching/Koniec wyszkiwania");
         return (selectedWordsToCrossword);
     }
-
     private static ArrayList<String> wordDraw(int i) {
-        ArrayList<String> currentListOfSize = new ArrayList<>();
+        Set<String> currentListOfSize = new HashSet<>();
         for (int j = 0; j < allWordsInCrossword.size(); j++) {
             if(allWordsInCrossword.get(j).length()==allWordsInformation.get(i).lengthOfWord){
                 currentListOfSize.add(allWordsInCrossword.get(j));
             }
         }
-        Collections.shuffle(currentListOfSize);
-        return currentListOfSize;
+        ArrayList<String> endList = new ArrayList<>(currentListOfSize);
+        Collections.shuffle(endList);
+        return endList;
     }
 
     public static ArrayList<String> downloadWordsFile() {

@@ -5,10 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class NavigationBar extends JPanel implements ActionListener {
@@ -60,7 +57,29 @@ public class NavigationBar extends JPanel implements ActionListener {
         if(event == mExit){
             exitApplication();
         }else if(event == mSave){
-
+            JFileChooser fileChooser= new JFileChooser();
+            fileChooser.showSaveDialog(null);
+            File fileToSave = fileChooser.getSelectedFile();
+            try {
+                File myObj = new File(fileToSave + ".txt");
+                if (myObj.createNewFile()) {
+                    try {
+                        FileWriter myWriter = new FileWriter(fileToSave + ".txt");
+                        for(String word: MainView.choseWords){
+                            myWriter.write(word + "\n");
+                        }
+                        myWriter.close();
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                } else {
+                    System.out.println("File already exists.");
+                }
+                JOptionPane.showMessageDialog(this,"File has been saved / Plik zostal zapisany","Information / O programie",JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException exception) {
+                System.out.println("An error occurred.");
+                exception.printStackTrace();
+            }
         }else if(event == mLoad){
             JFileChooser chooser = new JFileChooser();
             chooser.showOpenDialog(null);
