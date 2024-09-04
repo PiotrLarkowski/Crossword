@@ -275,7 +275,8 @@ public class MainView extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null, "Select word directory/Wybierz katalog slow",
                     "Information", JOptionPane.INFORMATION_MESSAGE);
             FindingWords findingWords = new FindingWords(allWordsList);
-            pickedWords = findingWords.run();
+            findingWords.start();
+//            pickedWords = findingWords.launchSearching();
             choseWords = pickedWords;
         }else if(event == setValueOfWordButton){
             setValueOfWordFrameOpen();
