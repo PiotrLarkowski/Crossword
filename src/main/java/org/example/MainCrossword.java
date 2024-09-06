@@ -9,10 +9,7 @@ import java.util.Arrays;
 public class MainCrossword extends JFrame {
     public static JFrame window;
     public static ArrayList<Integer> mainOrderOfSearchingWords =
-            new ArrayList<>(Arrays.asList(11,15,19,18,20,12,14,13,16,17,8,10,9,7,1,6,4,3,5,2,22,23,24
-                    ,28,25,26,21,27,29,30,31,32,33,34,35,36,37));
-
-
+            new ArrayList<>(Arrays.asList(11,12,14,13,17,15,16,19,18,20));
 
     public static void main(String[] args) {
 

@@ -114,7 +114,6 @@ public class MainView extends JPanel implements ActionListener {
 
         MainCrossword.window.getRootPane().setDefaultButton(refreshButton);
     }
-
     private static void fillEmptySpacesForChosenWords() {
         choseWords = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
@@ -263,27 +262,30 @@ public class MainView extends JPanel implements ActionListener {
         }
         return allWordsList;
     }
+    public void refreshView(){
+        inputChosenWordsIntoTextAreaFields();
+        repaint();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object event = e.getSource();
         if(event == refreshButton){
-            inputChosenWordsIntoTextAreaFields();
-            repaint();
+            refreshView();
         }else if(event == selectOrderButton){
             openChoosingWordOrderPanel();
         }else if(event == startFillingCrosswordButton){
             JOptionPane.showMessageDialog(null, "Select word directory/Wybierz katalog slow",
                     "Information", JOptionPane.INFORMATION_MESSAGE);
             FindingWords findingWords = new FindingWords(allWordsList);
-            findingWords.start();
-//            pickedWords = findingWords.launchSearching();
+            findingWords.run();
             choseWords = pickedWords;
+            refreshView();
         }else if(event == setValueOfWordButton){
             setValueOfWordFrameOpen();
         }else if(event == clearButton){
             choseWords.clear();
-            inputChosenWordsIntoTextAreaFields();
-            repaint();
+            refreshView();
         }
     }
 

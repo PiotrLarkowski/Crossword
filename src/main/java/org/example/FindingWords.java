@@ -1,18 +1,17 @@
 package org.example;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.util.*;
 
 import static java.lang.System.currentTimeMillis;
 
-public class FindingWords extends Thread{
+public class FindingWords{
     private static ArrayList<WordVariable> allWordsInformation;
     private static ArrayList<WordsConnection> parametersOfWords = WordsConnection.getParametersOfWords();
     private static ArrayList<String> allWordsInCrossword = new ArrayList<>();
     public static ArrayList<String> selectedWordsToCrossword = new ArrayList<>();
-
-
     public FindingWords(ArrayList<WordVariable> allWordsInfo) {
         allWordsInformation = allWordsInfo;
         allWordsInCrossword = downloadWordsFile();
@@ -48,39 +47,31 @@ public class FindingWords extends Thread{
         }
         return allWords;
     }
-    @Override
-    public void run() {
-        SearchingWindow searchingWindow = new SearchingWindow();
-        searchingWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        searchingWindow.setResizable(false);
-        searchingWindow.setLocationRelativeTo(null);
 
-        searchingWindow.setUndecorated(true);
-        searchingWindow.setVisible(true);
+    public void fillListWithEmptySlots(){
+        for (int i = 0; i < 37; i++) {
+            selectedWordsToCrossword.add(i,null);
+        }
+    }
+    public void run() {
+        fillListWithEmptySlots();
 
         boolean wordPass = true;
         boolean firstLoop = true;
-        int resetAllWords = 3;
+        int resetAllWords = 10;
         int useOfResetAllWords = resetAllWords;
 
-        long time1 = currentTimeMillis();
-        long time2 = 0;
-
-        for (int i = 0; i < 37; i++) {
-            if(time2 - time1 >= 200){
-                SearchingWindow.numberOfSearchingWord(i);
-                time1 = currentTimeMillis();
-            }
-            WordsConnection presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(i));
-//            WordsConnection presentWordParameters = parametersOfWords.get(i);
-            ArrayList<String> presentsWordsOfGivenLength = wordDraw(i);
+        WordsConnection presentWordParameters;
+        for (int i = 0; i < 10; i++) {
+            presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(i)-1);
+            ArrayList<String> presentsWordsOfGivenLength = wordDraw(MainCrossword.mainOrderOfSearchingWords.get(i)-1);
             String firstWordToFit;
             String presentWord = null;
             for (int ii = 0; ii < presentsWordsOfGivenLength.size(); ii++) {
                 presentWord = presentsWordsOfGivenLength.get(ii);
                 for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
                     try {
-                        firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j) - 1);
+                        firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j));
                         if (presentWord.charAt(presentWordParameters.numberOfLettersInWordConnectedToConnectedWords.get(j) - 1) ==
                                 firstWordToFit.charAt(presentWordParameters.numberOfPositionInConnectedWords.get(j) - 1)) {
                             wordPass = true;
@@ -94,7 +85,7 @@ public class FindingWords extends Thread{
                         }
                     }
                 }if (wordPass) {
-                    selectedWordsToCrossword.add(presentWord);
+                    selectedWordsToCrossword.add(MainCrossword.mainOrderOfSearchingWords.get(i),presentWord);
                     break;
                 }
             }
@@ -113,13 +104,11 @@ public class FindingWords extends Thread{
                 if(useOfResetAllWords<=0){
                     wordPass = true;
                     useOfResetAllWords = resetAllWords;
-                    selectedWordsToCrossword.clear();
+                    fillListWithEmptySlots();
                     i=-1;
                 }
             }
-            time2 = currentTimeMillis();
         }
-        searchingWindow.dispose();
         JOptionPane.showMessageDialog(MainCrossword.window,"End searching/Koniec wyszkiwania");
         MainView.pickedWords = selectedWordsToCrossword;
     }
