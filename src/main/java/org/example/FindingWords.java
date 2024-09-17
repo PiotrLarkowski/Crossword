@@ -58,7 +58,7 @@ public class FindingWords{
 
         boolean wordPass = true;
         boolean firstLoop = true;
-        int resetAllWords = 10;
+        int resetAllWords = 100;
         int useOfResetAllWords = resetAllWords;
 
         WordsConnection presentWordParameters;
