@@ -69,14 +69,17 @@ public class FindingWords {
             if(mainLoopIterator!=startFromSearchingWord && selectedWordsToCrossword.get(mainLoopIterator-1)==null){
                 resetCrossword(startFromSearchingWord);
             } //check if last word was find or not
+            if(selectedWordsToCrossword.get(mainLoopIterator)!=null && !selectedWordsToCrossword.get(mainLoopIterator).isEmpty()){
+                mainLoopIterator++;
+            }
             presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(mainLoopIterator)); //get parameters for searching number of word
             ArrayList<String> presentsWordsOfGivenLength = wordDraw(MainCrossword.mainOrderOfSearchingWords.get(mainLoopIterator));
             String firstWordToFit;
             String presentWord = null;
             for (int ii = 0; ii < presentsWordsOfGivenLength.size(); ii++) {
                 resetAllWords--;
-                presentWord = presentsWordsOfGivenLength.get(ii);
                 for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
+                    presentWord = presentsWordsOfGivenLength.get(ii);
                     firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)-1);
                     try {
                         if (!presentWord.equals(firstWordToFit)) {
@@ -111,6 +114,11 @@ public class FindingWords {
         wordPass = true;
         resetAllWords = 1000;
         fillListWithEmptySlots();
+        for (int i = 0; i < MainView.choseWords.size(); i++) {
+            if(!MainView.choseWords.get(i).trim().isBlank()){
+                selectedWordsToCrossword.set(i,MainView.choseWords.get(i));
+            }
+        }
         mainLoopIterator = startFromSearchingWord;
     }
 }

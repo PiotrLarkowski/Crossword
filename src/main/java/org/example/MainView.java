@@ -254,7 +254,67 @@ public class MainView extends JPanel implements ActionListener {
                 }
             }
         }
+        setNumbersOfWordInGivenPlacesOnCrossword(g);
+    }
 
+    private static void setNumbersOfWordInGivenPlacesOnCrossword(Graphics g) {
+        g.drawString("1-", 105,115);
+        g.drawString("37-", 405,665);
+        g.drawString("36", 505,565);
+        g.drawString("|", 507,576);
+        g.drawString("35-", 405,565);
+        g.drawString("34", 405,580);
+        g.drawString("|", 407,591);
+        g.drawString("33", 305,515);
+        g.drawString("|", 307,526);
+        g.drawString("32-", 105,715);
+        g.drawString("31", 205,515);
+        g.drawString("|", 207,526);
+        g.drawString("30-", 105,615);
+        g.drawString("29", 105,530);
+        g.drawString("|", 107,541);
+        g.drawString("28-", 105,515);
+        g.drawString("27-", 355,465);
+        g.drawString("26-", 355,365);
+        g.drawString("25", 355,315);
+        g.drawString("|", 360,326);
+        g.drawString("24", 255,315);
+        g.drawString("|", 260,326);
+        g.drawString("23-", 105,415);
+        g.drawString("22", 155,315);
+        g.drawString("|", 160,326);
+        g.drawString("21", 455,265);
+        g.drawString("|", 460,276);
+        g.drawString("18-", 605,415);
+        g.drawString("17", 905,115);
+        g.drawString("|", 910,126);
+        g.drawString("16", 805,115);
+        g.drawString("|", 810,126);
+        g.drawString("15-", 605,315);
+        g.drawString("19", 755,315);
+        g.drawString("|", 760,326);
+        g.drawString("20", 855,315);
+        g.drawString("|", 860,326);
+        g.drawString("13-", 605,215);
+        g.drawString("12-", 605,115);
+        g.drawString("14", 705,115);
+        g.drawString("|", 710,126);
+        g.drawString("11", 605,130);
+        g.drawString("|", 610,141);
+        g.drawString("10", 505,115);
+        g.drawString("|", 510,126);
+        g.drawString("3", 205,115);
+        g.drawString("|", 207,126);
+        g.drawString("6", 305,115);
+        g.drawString("|", 307,126);
+        g.drawString("7", 405,115);
+        g.drawString("|", 407,126);
+        g.drawString("8-", 405,165);
+        g.drawString("9-", 405,265);
+        g.drawString("2", 105,130);
+        g.drawString("|", 107,141);
+        g.drawString("4-", 105,215);
+        g.drawString("5-", 105,315);
     }
 
     private void creatingTextAreaBorder(Graphics g) {

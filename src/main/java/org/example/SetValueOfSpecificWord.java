@@ -13,6 +13,7 @@ public class SetValueOfSpecificWord extends JPanel implements ActionListener {
 
     JButton returnButton, setEnableTextFieldButton, applyWordButton;
     JComboBox wordChooser;
+    JTextField tfLongInputForWord;
     JTextField Letter1TextField = new JTextField(),
             Letter2TextField = new JTextField(),
             Letter3TextField = new JTextField(),
@@ -27,6 +28,7 @@ public class SetValueOfSpecificWord extends JPanel implements ActionListener {
             Letter12TextField = new JTextField(),
             Letter13TextField = new JTextField(),
             ExtraTextField;
+
 
     JLabel topLabel, middleLabel;
     ArrayList<JTextField> textFieldList = new ArrayList<>(Arrays.asList(Letter1TextField, Letter2TextField,
@@ -77,6 +79,10 @@ public class SetValueOfSpecificWord extends JPanel implements ActionListener {
                 });
         add(setEnableTextFieldButton);
         setEnableTextFieldButton.addActionListener(this);
+
+        tfLongInputForWord = new JTextField();
+        tfLongInputForWord.setBounds(350, 250, 300, 30);
+        add(tfLongInputForWord);
 
         topLabel = new JLabel("Set the Value of Specific character / Wybierz wartosci pojedynczych liter");
         topLabel.setBounds(200, 100, 500, 50);
@@ -219,7 +225,7 @@ public class SetValueOfSpecificWord extends JPanel implements ActionListener {
                 stringBuilder.append(textFieldList.get(i).getText());
             }
         }
-        MainView.choseWords.set(wordChooser.getSelectedIndex(), stringBuilder.toString());
+        MainView.choseWords.set(wordChooser.getSelectedIndex(), stringBuilder.toString().toUpperCase());
         JOptionPane.showMessageDialog(this, "Value has been set / Wartosc zostala ustawiona");
     }
     @Override
@@ -230,7 +236,12 @@ public class SetValueOfSpecificWord extends JPanel implements ActionListener {
         }else if(event == setEnableTextFieldButton){
             setEnableTextFields();
         }else if(event == applyWordButton){
-            combineValueOfLettersIntoWord();
+            if(!tfLongInputForWord.getText().isEmpty()){
+                MainView.choseWords.set(wordChooser.getSelectedIndex(), tfLongInputForWord.getText().toUpperCase());
+                JOptionPane.showMessageDialog(this, "Value has been set / Wartosc zostala ustawiona");
+            }else {
+                combineValueOfLettersIntoWord();
+            }
         }
     }
 }
