@@ -104,7 +104,7 @@ public class FindingWords {
             }
         }
         JOptionPane.showMessageDialog(MainCrossword.window, "End searching/Koniec wyszkiwania");
-        MainView.                                                                               pickedWords = selectedWordsToCrossword;
+        MainView.pickedWords = selectedWordsToCrossword;
     }
 
     public void resetCrossword(int startFromSearchingWord) {

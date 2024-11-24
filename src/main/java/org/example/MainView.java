@@ -48,7 +48,7 @@ public class MainView extends JPanel implements ActionListener {
         add(bFourthBlock);
         bFourthBlock.addActionListener(this);
 
-        bFifthBlock = new JButton("BLOCK 5 (21, 25)");
+        bFifthBlock = new JButton("BLOCK 5 (21, 27)");
         bFifthBlock.setBounds(800, 10, 130, 30);
         add(bFifthBlock);
         bFifthBlock.addActionListener(this);
@@ -286,7 +286,7 @@ public class MainView extends JPanel implements ActionListener {
     private static ArrayList<WordVariable> getWordVariables() {
         WordVariable word;
         ArrayList<WordVariable> allWordsList = new ArrayList<>();
-        int[] wordLength = {7, 5, 5, 7, 6, 5, 4, 5, 5, 4, 13, 7, 7, 5, 7, 5, 5, 7, 3, 3, 7, 5, 6, 5, 5, 6, 6, 6, 5, 7, 5, 7, 5, 4, 5, 4, 5};
+        int[] wordLength = {7, 5, 5, 7, 6, 5, 4, 5, 5, 4, 13, 7, 7, 5, 7, 5, 5, 7, 3, 3, 7, 5, 6, 5, 6, 6, 6, 6, 5, 7, 5, 7, 5, 4, 5, 4, 5};
         int[] firstPositionOfXAxis = {100, 100, 200, 100, 100, 300, 400, 400, 400, 500, 600, 600, 600, 700, 600, 800, 900, 600, 750, 850, 450,
                 150, 100, 250, 350, 350, 350, 100, 100, 100, 200, 100, 300, 400, 400, 500, 400};
         int[] firstPositionOfYAxis = {100, 100, 100, 200, 300, 100, 100, 150, 250, 100, 100, 100, 200, 100, 300, 100, 100, 400, 300, 300, 250,
@@ -329,7 +329,7 @@ public class MainView extends JPanel implements ActionListener {
         } else if (event == bFourthBlock) {
             startFindingTheWords(0, 20);
         } else if (event == bFifthBlock) {
-            startFindingTheWords(21, 25);
+            startFindingTheWords(21, 27);
         } else if (event == bSixthBlock) {
             startFindingTheWords(27, 37);
         }
