@@ -3,6 +3,8 @@ package org.example;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 import static java.lang.System.currentTimeMillis;
@@ -37,10 +39,8 @@ public class FindingWords {
 
     public static ArrayList<String> downloadWordsFile() {
         ArrayList<String> allWords = new ArrayList<>();
-        JFileChooser chooser = new JFileChooser();
-        int returnVal = chooser.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
+        MainView.tfPath.getText();
+            File file = new File(MainView.tfPath.getText());
             try {
                 Scanner myReader = new Scanner(file);
                 while (myReader.hasNextLine()) {
@@ -50,7 +50,7 @@ public class FindingWords {
             } catch (Exception e) {
                 System.out.println("Read File Problem");
             }
-        }
+//        }
         return allWords;
     }
 

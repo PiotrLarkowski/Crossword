@@ -16,6 +16,7 @@ public class MainView extends JPanel implements ActionListener {
     private JButton refreshButton, selectOrderButton, startFillingCrosswordButton, setValueOfWordButton, clearButton;
     public static ArrayList<WordVariable> allWordsList = getWordVariables();
     public static ArrayList<String> pickedWords = new ArrayList<>();
+    public static JTextField tfPath;
 
     public MainView() {
 
@@ -57,6 +58,12 @@ public class MainView extends JPanel implements ActionListener {
         bSixthBlock.setBounds(950, 10, 130, 30);
         add(bSixthBlock);
         bSixthBlock.addActionListener(this);
+
+//        tfPath = new JTextField("C:\\Users\\PC\\Documents\\wordsFULL.txt");
+        tfPath = new JTextField("C:\\Users\\alark\\Documents\\wyrazy.txt");
+        tfPath.setBounds(1200, 10, 500, 30);
+        tfPath.setEnabled(false);
+        add(tfPath);
 
         refreshButton = new JButton("Refresh / Odswiez");
         refreshButton.setBounds(675, 475, 400, 50);
@@ -336,8 +343,6 @@ public class MainView extends JPanel implements ActionListener {
     }
 
     private void startFindingTheWords(int startNumber, int endNumber) {
-        JOptionPane.showMessageDialog(null, "Select word directory/Wybierz katalog slow",
-                "Information", JOptionPane.INFORMATION_MESSAGE);
         FindingWords findingWords = new FindingWords(allWordsList);
         findingWords.run(startNumber, endNumber);
         choseWords = pickedWords;
