@@ -7,11 +7,17 @@ import java.util.*;
 
 import static java.lang.System.currentTimeMillis;
 
-public class FindingWords{
+public class FindingWords {
+
+    boolean wordPass = true;
+    int resetAllWords = 100;
+    int mainLoopIterator;
+
     private static ArrayList<WordVariable> allWordsInformation;
     private static ArrayList<WordsConnection> parametersOfWords = WordsConnection.getParametersOfWords();
     private static ArrayList<String> allWordsInCrossword = new ArrayList<>();
     public static ArrayList<String> selectedWordsToCrossword = new ArrayList<>();
+
     public FindingWords(ArrayList<WordVariable> allWordsInfo) {
         allWordsInformation = allWordsInfo;
         allWordsInCrossword = downloadWordsFile();
@@ -20,7 +26,7 @@ public class FindingWords{
     private static ArrayList<String> wordDraw(int i) {
         Set<String> currentListOfSize = new HashSet<>();
         for (int j = 0; j < allWordsInCrossword.size(); j++) {
-            if(allWordsInCrossword.get(j).length()==allWordsInformation.get(i).lengthOfWord){
+            if (allWordsInCrossword.get(j).length() == allWordsInformation.get(i).lengthOfWord) {
                 currentListOfSize.add(allWordsInCrossword.get(j));
             }
         }
@@ -48,68 +54,63 @@ public class FindingWords{
         return allWords;
     }
 
-    public void fillListWithEmptySlots(){
-        for (int i = 0; i < 37; i++) {
-            selectedWordsToCrossword.add(i,null);
-        }
+    public void fillListWithEmptySlots() {
+        selectedWordsToCrossword = new ArrayList<>(Arrays.asList(
+                null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null));
     }
-    public void run() {
-        fillListWithEmptySlots();
 
-        boolean wordPass = true;
-        boolean firstLoop = true;
-        int resetAllWords = 100;
-        int useOfResetAllWords = resetAllWords;
-
+    public void run(int startFromSearchingWord, int stopToSearchingWord) {
+        resetCrossword(startFromSearchingWord);
         WordsConnection presentWordParameters;
-        for (int i = 0; i < 10; i++) {
-            presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(i)-1);
-            ArrayList<String> presentsWordsOfGivenLength = wordDraw(MainCrossword.mainOrderOfSearchingWords.get(i)-1);
+        for (mainLoopIterator = startFromSearchingWord; mainLoopIterator < stopToSearchingWord; mainLoopIterator++) {
+            if(mainLoopIterator!=startFromSearchingWord && selectedWordsToCrossword.get(mainLoopIterator-1)==null){
+                resetCrossword(startFromSearchingWord);
+            } //check if last word was find or not
+            presentWordParameters = parametersOfWords.get(MainCrossword.mainOrderOfSearchingWords.get(mainLoopIterator)); //get parameters for searching number of word
+            ArrayList<String> presentsWordsOfGivenLength = wordDraw(MainCrossword.mainOrderOfSearchingWords.get(mainLoopIterator));
             String firstWordToFit;
             String presentWord = null;
             for (int ii = 0; ii < presentsWordsOfGivenLength.size(); ii++) {
+                resetAllWords--;
                 presentWord = presentsWordsOfGivenLength.get(ii);
                 for (int j = 0; j < presentWordParameters.numberOfConnectedWords; j++) {
+                    firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j)-1);
                     try {
-                        firstWordToFit = selectedWordsToCrossword.get(presentWordParameters.numberOfWordsToConnectedWords.get(j));
-                        if (presentWord.charAt(presentWordParameters.numberOfLettersInWordConnectedToConnectedWords.get(j) - 1) ==
-                                firstWordToFit.charAt(presentWordParameters.numberOfPositionInConnectedWords.get(j) - 1)) {
-                            wordPass = true;
-                        } else {
-                            wordPass=false;
-                            break;
+                        if (!presentWord.equals(firstWordToFit)) {
+                            if (presentWord.charAt(presentWordParameters.numberOfLettersInWordConnectedToConnectedWords.get(j) - 1) ==
+                                    firstWordToFit.charAt(presentWordParameters.numberOfPositionInConnectedWords.get(j) - 1)) {
+                                wordPass = true;
+                            } else {
+                                wordPass = false;
+                                break;
+                            }
                         }
-                    } catch (Exception e) {
-                        if (j == presentWordParameters.numberOfConnectedWords - 1) {
-                            wordPass = true;
-                        }
+                    } catch (Exception ignore) {
+                        wordPass = true;
                     }
-                }if (wordPass) {
-                    selectedWordsToCrossword.add(MainCrossword.mainOrderOfSearchingWords.get(i),presentWord);
+                }
+                if (wordPass) {
+                    selectedWordsToCrossword.set(MainCrossword.mainOrderOfSearchingWords.get(mainLoopIterator), presentWord);
+                    resetAllWords = 100;
                     break;
-                }
-            }
-            if(!wordPass){
-                if(!firstLoop) {
-                    i--;
-                }
-                for (int j = 0; j < 4; j++) {
-                    if(i>0){
-                        selectedWordsToCrossword.remove(i-1);
-                        firstLoop = false;
-                        i--;
-                        useOfResetAllWords--;
+                } else {
+                    if (resetAllWords <= 0) {
+                        resetCrossword(startFromSearchingWord);
                     }
-                }
-                if(useOfResetAllWords<=0){
-                    wordPass = true;
-                    useOfResetAllWords = resetAllWords;
-                    fillListWithEmptySlots();
-                    i=-1;
                 }
             }
         }
-        JOptionPane.showMessageDialog(MainCrossword.window,"End searching/Koniec wyszkiwania");
-        MainView.pickedWords = selectedWordsToCrossword;
+        JOptionPane.showMessageDialog(MainCrossword.window, "End searching/Koniec wyszkiwania");
+        MainView.                                                                               pickedWords = selectedWordsToCrossword;
+    }
+
+    public void resetCrossword(int startFromSearchingWord) {
+        wordPass = true;
+        resetAllWords = 1000;
+        fillListWithEmptySlots();
+        mainLoopIterator = startFromSearchingWord;
     }
 }
