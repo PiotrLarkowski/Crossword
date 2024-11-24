@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class MainView extends JPanel implements ActionListener {
-
     public final JButton bFirstBlock, bSecondBlock, bThirdBlock, bFourthBlock, bFifthBlock, bSixthBlock;
     static Dimension screenSize;
     public static JFrame selectOrderFrame, setValueOfWordFrame;
@@ -17,6 +16,7 @@ public class MainView extends JPanel implements ActionListener {
     public static ArrayList<WordVariable> allWordsList = getWordVariables();
     public static ArrayList<String> pickedWords = new ArrayList<>();
     public static JTextField tfPath;
+    public static JCheckBox jcNumbersOfWords;
 
     public MainView() {
 
@@ -58,6 +58,11 @@ public class MainView extends JPanel implements ActionListener {
         bSixthBlock.setBounds(950, 10, 130, 30);
         add(bSixthBlock);
         bSixthBlock.addActionListener(this);
+
+        jcNumbersOfWords = new JCheckBox();
+        jcNumbersOfWords.setBounds(1005, 670, 50, 50);
+        add(jcNumbersOfWords);
+        jcNumbersOfWords.addActionListener(this);
 
 //        tfPath = new JTextField("C:\\Users\\PC\\Documents\\wordsFULL.txt");
         tfPath = new JTextField("C:\\Users\\alark\\Documents\\wyrazy.txt");
@@ -111,7 +116,7 @@ public class MainView extends JPanel implements ActionListener {
         startFillingCrosswordButton.addActionListener(this);
 
         setValueOfWordButton = new JButton("Set value of specific word / Ustaw konkretne slowa");
-        setValueOfWordButton.setBounds(675, 670, 400, 50);
+        setValueOfWordButton.setBounds(675, 670, 300, 50);
         setValueOfWordButton.addKeyListener(
                 new KeyAdapter() {
                     public void keyPressed(KeyEvent e) {
@@ -254,7 +259,9 @@ public class MainView extends JPanel implements ActionListener {
                 }
             }
         }
-        setNumbersOfWordInGivenPlacesOnCrossword(g);
+        if(jcNumbersOfWords.isSelected()) {
+            setNumbersOfWordInGivenPlacesOnCrossword(g);
+        }
     }
 
     private static void setNumbersOfWordInGivenPlacesOnCrossword(Graphics g) {
@@ -399,6 +406,8 @@ public class MainView extends JPanel implements ActionListener {
             startFindingTheWords(21, 27);
         } else if (event == bSixthBlock) {
             startFindingTheWords(27, 37);
+        }else if(event == jcNumbersOfWords){
+            repaint();
         }
     }
 
@@ -414,7 +423,7 @@ public class MainView extends JPanel implements ActionListener {
         setValueOfWordFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setValueOfWordFrame.setResizable(false);
         setValueOfWordFrame.setTitle("Set word value");
-        setValueOfWordFrame.setUndecorated(true);
+//        setValueOfWordFrame.setUndecorated(true);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
         SetValueOfSpecificWord setValueOfWordPanel = new SetValueOfSpecificWord();
