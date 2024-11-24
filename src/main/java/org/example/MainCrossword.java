@@ -16,10 +16,8 @@ public class MainCrossword extends JFrame {
 
         window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
         window.setTitle("Crossword");
 
-        window.setUndecorated(true);
         window.setVisible(true);
 
         MainView crosswordPanel = new MainView();

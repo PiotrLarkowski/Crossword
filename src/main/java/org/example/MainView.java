@@ -25,7 +25,7 @@ public class MainView extends JPanel implements ActionListener {
         Toolkit toolkit = getToolkit();
         screenSize = toolkit.getScreenSize();
 
-        this.setPreferredSize(new Dimension(screenSize.width, screenSize.height));
+        this.setPreferredSize(new Dimension(1500,1000));
         this.setBackground(Color.GRAY);
         this.setDoubleBuffered(true);
 
