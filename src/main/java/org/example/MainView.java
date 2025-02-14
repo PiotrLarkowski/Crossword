@@ -29,7 +29,7 @@ public class MainView extends JPanel implements ActionListener {
         this.setBackground(Color.GRAY);
         this.setDoubleBuffered(true);
 
-        bFirstBlock = new JButton("BLOCK 1 (0-7)");
+        bFirstBlock = new JButton("BLOCK 1 (1-7)");
         bFirstBlock.setBounds(200, 10, 130, 30);
         add(bFirstBlock);
         bFirstBlock.addActionListener(this);
@@ -39,22 +39,22 @@ public class MainView extends JPanel implements ActionListener {
         add(bSecondBlock);
         bSecondBlock.addActionListener(this);
 
-        bThirdBlock = new JButton("BLOCK 3 (0-17)");
+        bThirdBlock = new JButton("BLOCK 3 (1-17)");
         bThirdBlock.setBounds(500, 10, 130, 30);
         add(bThirdBlock);
         bThirdBlock.addActionListener(this);
 
-        bFourthBlock = new JButton("BLOCK 4 (0-20)");
+        bFourthBlock = new JButton("BLOCK 4 (1-20)");
         bFourthBlock.setBounds(650, 10, 130, 30);
         add(bFourthBlock);
         bFourthBlock.addActionListener(this);
 
-        bFifthBlock = new JButton("BLOCK 5 (21, 27)");
+        bFifthBlock = new JButton("BLOCK 5 (21-27)");
         bFifthBlock.setBounds(800, 10, 130, 30);
         add(bFifthBlock);
         bFifthBlock.addActionListener(this);
 
-        bSixthBlock = new JButton("BLOCK 6 (27, 37)");
+        bSixthBlock = new JButton("BLOCK 6 (27-37)");
         bSixthBlock.setBounds(950, 10, 130, 30);
         add(bSixthBlock);
         bSixthBlock.addActionListener(this);
@@ -64,8 +64,8 @@ public class MainView extends JPanel implements ActionListener {
         add(jcNumbersOfWords);
         jcNumbersOfWords.addActionListener(this);
 
-//        tfPath = new JTextField("C:\\Users\\PC\\Documents\\wordsFULL.txt");
-        tfPath = new JTextField("C:\\Users\\alark\\Documents\\wyrazy.txt");
+        tfPath = new JTextField("C:\\Users\\PC\\Documents\\wordsFULL.txt");
+//        tfPath = new JTextField("C:\\Users\\alark\\Documents\\wyrazy.txt");
         tfPath.setBounds(1200, 10, 500, 30);
         tfPath.setEnabled(false);
         add(tfPath);
