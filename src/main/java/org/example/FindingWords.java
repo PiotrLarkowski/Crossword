@@ -1,13 +1,8 @@
 package org.example;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
-
-import static java.lang.System.currentTimeMillis;
 
 public class FindingWords {
 
@@ -54,21 +49,13 @@ public class FindingWords {
         return allWords;
     }
 
-    public void fillListWithEmptySlots() {
-        selectedWordsToCrossword = new ArrayList<>(Arrays.asList(
-                null, null, null, null, null, null, null, null, null, null,
-                null, null, null, null, null, null, null, null, null, null,
-                null, null, null, null, null, null, null, null, null, null,
-                null, null, null, null, null, null, null));
-    }
-
     public void run(int startFromSearchingWord, int stopToSearchingWord) {
         resetCrossword(startFromSearchingWord);
         WordsConnection presentWordParameters;
         for (mainLoopIterator = startFromSearchingWord; mainLoopIterator < stopToSearchingWord; mainLoopIterator++) {
             if(mainLoopIterator!=startFromSearchingWord && selectedWordsToCrossword.get(mainLoopIterator-1)==null){
                 resetCrossword(startFromSearchingWord);
-            } //check if last word was find or not
+            }
             if(selectedWordsToCrossword.get(mainLoopIterator)!=null && !selectedWordsToCrossword.get(mainLoopIterator).isEmpty()){
                 mainLoopIterator++;
             }
@@ -111,14 +98,24 @@ public class FindingWords {
     }
 
     public void resetCrossword(int startFromSearchingWord) {
+        mainLoopIterator = startFromSearchingWord;
         wordPass = true;
         resetAllWords = 1000;
-        fillListWithEmptySlots();
+        fillChosenWordsListWithEmptySlots();
+        clearChosenWordsOnMainView();
+    }
+    public void clearChosenWordsOnMainView(){
         for (int i = 0; i < MainView.choseWords.size(); i++) {
             if(!MainView.choseWords.get(i).trim().isBlank()){
                 selectedWordsToCrossword.set(i,MainView.choseWords.get(i));
             }
         }
-        mainLoopIterator = startFromSearchingWord;
+    }
+    public void fillChosenWordsListWithEmptySlots() {
+        selectedWordsToCrossword = new ArrayList<>(Arrays.asList(
+                null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null));
     }
 }

@@ -6,16 +6,16 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class MainView extends JPanel implements ActionListener {
-    public final JButton bFirstBlock, bSecondBlock, bThirdBlock, bFourthBlock, bFifthBlock, bSixthBlock;
+    public final JButton bFirstBlock, bSecondBlock, bThirdBlock, bFourthBlock, bFifthBlock, bSixthBlock, bSearchGivenRange;
     static Dimension screenSize;
     public static JFrame selectOrderFrame, setValueOfWordFrame;
     public static ArrayList<String> choseWords = new ArrayList<>();
     private JTextArea chosenWordsTextArea;
-    private JLabel chosenWordsLabel;
+    private JLabel chosenWordsLabel, jlFirstRange, jlSecondRange;
     private JButton refreshButton, selectOrderButton, startFillingCrosswordButton, setValueOfWordButton, clearButton;
     public static ArrayList<WordVariable> allWordsList = getWordVariables();
     public static ArrayList<String> pickedWords = new ArrayList<>();
-    public static JTextField tfPath;
+    public static JTextField tfPath, tfFirstRange, tfSecondRange;
     public static JCheckBox jcNumbersOfWords;
 
     public MainView() {
@@ -34,7 +34,7 @@ public class MainView extends JPanel implements ActionListener {
         add(bFirstBlock);
         bFirstBlock.addActionListener(this);
 
-        bSecondBlock = new JButton("BLOCK 2 (10-20)");
+        bSecondBlock = new JButton("BLOCK 2 (11-20)");
         bSecondBlock.setBounds(350, 10, 130, 30);
         add(bSecondBlock);
         bSecondBlock.addActionListener(this);
@@ -49,12 +49,12 @@ public class MainView extends JPanel implements ActionListener {
         add(bFourthBlock);
         bFourthBlock.addActionListener(this);
 
-        bFifthBlock = new JButton("BLOCK 5 (21-27)");
+        bFifthBlock = new JButton("BLOCK 5 (21-28)");
         bFifthBlock.setBounds(800, 10, 130, 30);
         add(bFifthBlock);
         bFifthBlock.addActionListener(this);
 
-        bSixthBlock = new JButton("BLOCK 6 (27-37)");
+        bSixthBlock = new JButton("BLOCK 6 (28-37)");
         bSixthBlock.setBounds(950, 10, 130, 30);
         add(bSixthBlock);
         bSixthBlock.addActionListener(this);
@@ -64,9 +64,42 @@ public class MainView extends JPanel implements ActionListener {
         add(jcNumbersOfWords);
         jcNumbersOfWords.addActionListener(this);
 
-        tfPath = new JTextField("C:\\Users\\PC\\Documents\\wordsFULL.txt");
-//        tfPath = new JTextField("C:\\Users\\alark\\Documents\\wyrazy.txt");
-        tfPath.setBounds(1200, 10, 500, 30);
+        jlFirstRange = new JLabel("First number:");
+        jlFirstRange.setBounds(1120, 10, 90, 30);
+        jlFirstRange.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        add(jlFirstRange);
+
+        tfFirstRange = new JTextField("1");
+        tfFirstRange.setBounds(1200, 10, 30, 30);
+        add(tfFirstRange);
+
+        jlSecondRange = new JLabel("Last number:");
+        jlSecondRange.setBounds(1250, 10, 90, 30);
+        jlSecondRange.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        add(jlSecondRange);
+
+        tfSecondRange = new JTextField("28");
+        tfSecondRange.setBounds(1330, 10, 30, 30);
+        add(tfSecondRange);
+
+        bSearchGivenRange = new JButton("Szukaj");
+        bSearchGivenRange.setBounds(1380, 10, 100, 30);
+        bSearchGivenRange.addKeyListener(
+                new KeyAdapter() {
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            repaint();
+                        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            doExit();
+                        }
+                    }
+                });
+        add(bSearchGivenRange);
+        bSearchGivenRange.addActionListener(this);
+
+//        tfPath = new JTextField("C:\\Users\\PC\\Documents\\wyrazyCalaWersja2.txt");
+        tfPath = new JTextField("C:\\Users\\alark\\Documents\\wyrazy.txt");
+        tfPath.setBounds(1130, 65, 300, 30);
         tfPath.setEnabled(false);
         add(tfPath);
 
@@ -360,7 +393,7 @@ public class MainView extends JPanel implements ActionListener {
     private static ArrayList<WordVariable> getWordVariables() {
         WordVariable word;
         ArrayList<WordVariable> allWordsList = new ArrayList<>();
-        int[] wordLength = {7, 5, 5, 7, 6, 5, 4, 5, 5, 4, 13, 7, 7, 5, 7, 5, 5, 7, 3, 3, 7, 5, 6, 5, 6, 6, 6, 6, 5, 7, 5, 7, 5, 4, 5, 4, 5};
+        int[] wordLength = {7, 5, 5, 7, 6, 5, 4, 5, 5, 4, 13, 7, 7, 5, 7, 5, 5, 7, 3, 3, 7, 5, 6, 5, 5, 6, 6, 6, 5, 7, 5, 7, 5, 4, 5, 4, 5};
         int[] firstPositionOfXAxis = {100, 100, 200, 100, 100, 300, 400, 400, 400, 500, 600, 600, 600, 700, 600, 800, 900, 600, 750, 850, 450,
                 150, 100, 250, 350, 350, 350, 100, 100, 100, 200, 100, 300, 400, 400, 500, 400};
         int[] firstPositionOfYAxis = {100, 100, 100, 200, 300, 100, 100, 150, 250, 100, 100, 100, 200, 100, 300, 100, 100, 400, 300, 300, 250,
@@ -397,17 +430,19 @@ public class MainView extends JPanel implements ActionListener {
         } else if (event == bFirstBlock) {
             startFindingTheWords(0, 7);
         } else if (event == bSecondBlock) {
-            startFindingTheWords(10, 20);
+            startFindingTheWords(10, 20);//11-20
         } else if (event == bThirdBlock) {
             startFindingTheWords(0, 17);
         } else if (event == bFourthBlock) {
             startFindingTheWords(0, 20);
         } else if (event == bFifthBlock) {
-            startFindingTheWords(21, 27);
+            startFindingTheWords(21, 28);
         } else if (event == bSixthBlock) {
-            startFindingTheWords(27, 37);
+            startFindingTheWords(28, 37);//28-37
         }else if(event == jcNumbersOfWords){
             repaint();
+        }else if(event == bSearchGivenRange){
+            startFindingTheWords(Integer.parseInt(tfFirstRange.getText())-1, Integer.parseInt(tfSecondRange.getText())-1);
         }
     }
 
