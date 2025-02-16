@@ -21,15 +21,14 @@ public class FindingWords {
     }
 
     private static ArrayList<String> wordDraw(int i) {
-        Set<String> currentListOfSize = new HashSet<>();
+        ArrayList<String> currentListOfSize = new ArrayList<>();
         for (int j = 0; j < allWordsInCrossword.size(); j++) {
             if (allWordsInCrossword.get(j).length() == allWordsInformation.get(i).lengthOfWord) {
                 currentListOfSize.add(allWordsInCrossword.get(j));
             }
         }
-        ArrayList<String> endList = new ArrayList<>(currentListOfSize);
-        Collections.shuffle(endList);
-        return endList;
+        Collections.shuffle(currentListOfSize);
+        return currentListOfSize;
     }
 
     public static ArrayList<String> downloadWordsFile() {
@@ -37,15 +36,14 @@ public class FindingWords {
         MainView.tfPath.getText();
             File file = new File(MainView.tfPath.getText());
             try {
-                Scanner myReader = new Scanner(file);
+                Scanner myReader = new Scanner(file, "UTF-8");
                 while (myReader.hasNextLine()) {
-                    allWords.add(myReader.nextLine());
+                    allWords.add(myReader.nextLine().toUpperCase());
                 }
                 myReader.close();
             } catch (Exception e) {
                 System.out.println("Read File Problem");
             }
-//        }
         return allWords;
     }
 
@@ -89,6 +87,7 @@ public class FindingWords {
                 } else {
                     if (resetAllWords <= 0) {
                         resetCrossword(startFromSearchingWord);
+                        break;
                     }
                 }
             }
@@ -100,7 +99,7 @@ public class FindingWords {
     public void resetCrossword(int startFromSearchingWord) {
         mainLoopIterator = startFromSearchingWord;
         wordPass = true;
-        resetAllWords = 1000;
+        resetAllWords = 100;
         fillChosenWordsListWithEmptySlots();
         clearChosenWordsOnMainView();
     }

@@ -11,7 +11,9 @@ public class MainView extends JPanel implements ActionListener {
     public static JFrame selectOrderFrame, setValueOfWordFrame;
     public static ArrayList<String> choseWords = new ArrayList<>();
     private JTextArea chosenWordsTextArea;
-    private JLabel chosenWordsLabel, jlFirstRange, jlSecondRange;
+    private JLabel chosenWordsLabel;
+    private JLabel jlFirstRange;
+    private JLabel jlSecondRange;
     private JButton refreshButton, selectOrderButton, startFillingCrosswordButton, setValueOfWordButton, clearButton;
     public static ArrayList<WordVariable> allWordsList = getWordVariables();
     public static ArrayList<String> pickedWords = new ArrayList<>();
@@ -98,7 +100,8 @@ public class MainView extends JPanel implements ActionListener {
         bSearchGivenRange.addActionListener(this);
 
 //        tfPath = new JTextField("C:\\Users\\PC\\Documents\\wyrazyCalaWersja2.txt");
-        tfPath = new JTextField("C:\\Users\\alark\\Documents\\wyrazy.txt");
+        tfPath = new JTextField("C:\\Users\\Piotr\\Documents\\wyrazy_moje2.txt");
+//        tfPath = new JTextField("C:\\Users\\alark\\Documents\\wyrazy.txt");
         tfPath.setBounds(1130, 65, 300, 30);
         tfPath.setEnabled(false);
         add(tfPath);
@@ -489,7 +492,6 @@ public class MainView extends JPanel implements ActionListener {
         selectOrderFrame.pack();
         selectOrderFrame.setVisible(true);
     }
-
     private void doExit() {
         int answer = JOptionPane.showConfirmDialog(MainCrossword.window, "Are You sure You want to exit? \n Czy napewno chcesz zakonczyc program?", "Exit", JOptionPane.YES_NO_OPTION);
         if (answer == JOptionPane.YES_OPTION)
