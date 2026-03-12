@@ -15,22 +15,76 @@ public class FindingWords {
     private static ArrayList<String> allWordsInCrossword = new ArrayList<>();
     public static ArrayList<String> selectedWordsToCrossword = new ArrayList<>();
 
+    private static ArrayList<String> NumberOfCharacters3Words = new ArrayList<>();
+    private static ArrayList<String> NumberOfCharacters4Words = new ArrayList<>();
+    private static ArrayList<String> NumberOfCharacters5Words = new ArrayList<>();
+    private static ArrayList<String> NumberOfCharacters6Words = new ArrayList<>();
+    private static ArrayList<String> NumberOfCharacters7Words = new ArrayList<>();
+    private static ArrayList<String> NumberOfCharacters13Words = new ArrayList<>();
+
     public FindingWords(ArrayList<WordVariable> allWordsInfo) {
         allWordsInformation = allWordsInfo;
         allWordsInCrossword = downloadWordsFile();
+        fillMainArrayOfWords();
+    }
+
+    private static void fillMainArrayOfWords(){
+        for (int j = 0; j < allWordsInCrossword.size(); j++) {
+            if (allWordsInCrossword.get(j).length() == 3) {
+                NumberOfCharacters3Words.add(allWordsInCrossword.get(j));
+            }else if(allWordsInCrossword.get(j).length() == 4){
+                NumberOfCharacters4Words.add(allWordsInCrossword.get(j));
+            }else if(allWordsInCrossword.get(j).length() == 5){
+                NumberOfCharacters5Words.add(allWordsInCrossword.get(j));
+            }else if(allWordsInCrossword.get(j).length() == 6){
+                NumberOfCharacters6Words.add(allWordsInCrossword.get(j));
+            }else if(allWordsInCrossword.get(j).length() == 7){
+                NumberOfCharacters7Words.add(allWordsInCrossword.get(j));
+            }else if(allWordsInCrossword.get(j).length() == 13){
+                NumberOfCharacters13Words.add(allWordsInCrossword.get(j));
+
+            }
+        }
     }
 
     private static ArrayList<String> wordDraw(int i) {
         ArrayList<String> currentListOfSize = new ArrayList<>();
-        for (int j = 0; j < allWordsInCrossword.size(); j++) {
-            if (allWordsInCrossword.get(j).length() == allWordsInformation.get(i).lengthOfWord) {
-                currentListOfSize.add(allWordsInCrossword.get(j));
+        int length = allWordsInformation.get(i).lengthOfWord;
+        switch(length){
+            case 3:
+            {
+                currentListOfSize = NumberOfCharacters3Words;
+                break;
+            }
+            case 4:
+            {
+                currentListOfSize = NumberOfCharacters4Words;
+                break;
+            }
+            case 5:
+            {
+                currentListOfSize = NumberOfCharacters5Words;
+                break;
+            }
+            case 6:
+            {
+                currentListOfSize = NumberOfCharacters6Words;
+                break;
+            }
+            case 7:
+            {
+                currentListOfSize = NumberOfCharacters7Words;
+                break;
+            }
+            case 13:
+            {
+                currentListOfSize = NumberOfCharacters13Words;
+                break;
             }
         }
         Collections.shuffle(currentListOfSize);
         return currentListOfSize;
     }
-
     public static ArrayList<String> downloadWordsFile() {
         ArrayList<String> allWords = new ArrayList<>();
         MainView.tfPath.getText();
@@ -82,7 +136,7 @@ public class FindingWords {
                 }
                 if (wordPass) {
                     selectedWordsToCrossword.set(MainCrossword.mainOrderOfSearchingWords.get(mainLoopIterator), presentWord);
-                    resetAllWords = 100;
+                    resetAllWords = 10000;
                     break;
                 } else {
                     if (resetAllWords <= 0) {

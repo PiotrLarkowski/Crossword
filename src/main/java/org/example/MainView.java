@@ -36,7 +36,7 @@ public class MainView extends JPanel implements ActionListener {
         add(bFirstBlock);
         bFirstBlock.addActionListener(this);
 
-        bSecondBlock = new JButton("BLOCK 2 (11-20)");
+        bSecondBlock = new JButton("BLOCK 2 (1-29)");
         bSecondBlock.setBounds(350, 10, 130, 30);
         add(bSecondBlock);
         bSecondBlock.addActionListener(this);
@@ -100,7 +100,8 @@ public class MainView extends JPanel implements ActionListener {
         bSearchGivenRange.addActionListener(this);
 
 //        tfPath = new JTextField("C:\\Users\\PC\\Documents\\wyrazyCalaWersja2.txt");
-        tfPath = new JTextField("C:\\Users\\Piotr\\Documents\\wyrazy_moje2.txt");
+//        tfPath = new JTextField("C:\\Users\\Piotr\\Documents\\wyrazy_moje2.txt");
+        tfPath = new JTextField("D:\\Krzyrzowka\\wyrazy.txt");
 //        tfPath = new JTextField("C:\\Users\\alark\\Documents\\wyrazy.txt");
         tfPath.setBounds(1130, 65, 300, 30);
         tfPath.setEnabled(false);
@@ -433,7 +434,7 @@ public class MainView extends JPanel implements ActionListener {
         } else if (event == bFirstBlock) {
             startFindingTheWords(0, 7);
         } else if (event == bSecondBlock) {
-            startFindingTheWords(10, 20);//11-20
+            startFindingTheWords(0, 29);//11-20
         } else if (event == bThirdBlock) {
             startFindingTheWords(0, 17);
         } else if (event == bFourthBlock) {
